@@ -6,3 +6,4 @@ weeknote-backup-*.json
 backups/
 .DS_Store
 Thumbs.db
+studycal-backup-*.json

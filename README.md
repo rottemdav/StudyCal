@@ -1,4 +1,4 @@
-# Weeknote
+# StudyCal
 
 A local, Hebrew, right-to-left study planner. Open `index.html` in a browser to use it. No installation or server is required.
 
