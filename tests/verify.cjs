@@ -232,4 +232,18 @@ assert.equal(fullDay.kind,'all-day');assert.equal(fullDay.time,'');assert.equal(
 assert.ok(!renderDayLanes(allDayDate,date(allDayDate),[fullDay]).includes('class="day-lanes"'));
 assert.ok(renderDayLanes(allDayDate,date(allDayDate),[fullDay,{...fullDay,kind:'lecture',id:'parallel-lecture'}]).includes('class="day-lanes"'));
 assert.ok($('calendar').innerHTML.includes(allDayDate+'-all-day'));assert.equal(validBackup(JSON.parse(persisted)),true);
+data.examCourses=['Practice course A','Practice course B'];data.examPrep=[];prepCourse='Practice course A';renderExamPrep();
+const solvedBeforePractice=JSON.stringify(prepPanel(prepCourse).solved);
+$('openExamsToSolve').onclick();assert.equal($('examsToSolveNames').value,'');
+$('examsToSolveNames').value='  Exam 2024 A  '+String.fromCharCode(10)+String.fromCharCode(10)+'Exam 2023 B';
+prepCourse='Practice course B';$('examsToSolveForm').onsubmit({preventDefault(){}});
+assert.equal(prepPanel('Practice course A').examsToSolve.join(','),'Exam 2024 A,Exam 2023 B');
+assert.equal(prepPanel('Practice course B').examsToSolve,undefined);assert.equal(JSON.stringify(prepPanel('Practice course A').solved),solvedBeforePractice);
+assert.equal(validBackup(JSON.parse(persisted)),true);
+prepCourse='Practice course A';$('openExamsToSolve').onclick();assert.ok($('examsToSolveNames').value.includes('Exam 2024 A'));
+$('examsToSolveNames').value='Discarded';$('cancelExamsToSolve').onclick();assert.equal(prepPanel(prepCourse).examsToSolve.length,2);
+$('openExamsToSolve').onclick();$('examsToSolveNames').value='x'.repeat(201);$('examsToSolveForm').onsubmit({preventDefault(){}});assert.ok($('examsToSolveError').textContent);assert.equal(prepPanel(prepCourse).examsToSolve.length,2);
+$('examsToSolveNames').value='';$('examsToSolveForm').onsubmit({preventDefault(){}});assert.equal(prepPanel(prepCourse).examsToSolve.length,0);
+const invalidPractice=JSON.parse(persisted);invalidPractice.examPrep[0].examsToSolve=[42];assert.equal(validBackup(invalidPractice),false);delete invalidPractice.examPrep[0].examsToSolve;assert.equal(validBackup(invalidPractice),true);
+console.log('PASS: Per-course exams-to-solve lists, editing/clearing/cancel, length validation, captured course isolation, solved-list preservation and backup compatibility.');
 `,context);
