@@ -1,0 +1,747 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weeknote — יומן לימודים</title>
+<style>
+:root{--bg:#f6f7f9;--ink:#202c37;--muted:#75808d;--line:#e3e7ec;--accent:#526b55;--green:#eaf1e8;--purple:#7461b1}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 'Segoe UI',Arial,sans-serif}button,input,select,textarea{font:inherit}button,a,input,select,textarea{outline-offset:4px}button{cursor:pointer}button:disabled{opacity:.5;cursor:default}button{border:1px solid var(--line);background:white;color:var(--ink);border-radius:8px;padding:9px 13px}button:hover{background:#f0f3f0}.primary{background:var(--accent);color:white;border-color:var(--accent)}.primary:hover{background:#405744}.quiet{background:transparent}.shell{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:100vh}aside{background:#fff;border-right:1px solid var(--line);padding:30px 20px;display:flex;flex-direction:column;gap:30px}.brand{font-size:24px;font-weight:650;letter-spacing:-1px;display:flex;gap:10px;align-items:center}.mark{background:var(--accent);color:white;border-radius:10px;width:35px;height:35px;display:grid;place-items:center;font-size:23px}.brand small{display:block;letter-spacing:0;font-weight:400;font-size:11px;color:var(--muted)}.section-label{text-transform:uppercase;font-size:10px;letter-spacing:1.8px;font-weight:700;color:var(--muted);margin:0 0 12px}.nav-active{padding:12px;border-radius:8px;background:var(--green);font-weight:600;color:#425d43}.course-list{display:grid;gap:6px}.course-list button{border:0;text-align:left;display:flex;gap:9px;align-items:center;overflow-wrap:anywhere}.course-list button.selected{background:#eff2f5;font-weight:600}.dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0}.side-note{margin-top:auto;border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font-size:12px}.side-note strong{color:var(--accent);font-weight:600}.backup-actions{display:flex;gap:6px;margin-top:13px}.backup-actions button{font-size:12px;padding:6px 9px}main{padding:34px 36px;min-width:0;max-width:1900px;width:100%;margin:auto}.topline{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:28px}.eyebrow{color:var(--accent);letter-spacing:2px;font-size:10px;font-weight:700}h1{font-size:32px;font-weight:600;letter-spacing:-1.2px;margin:5px 0}p{margin:0}.subtitle{color:var(--muted)}.intro{display:flex;justify-content:space-between;align-items:center;gap:20px}.overview{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:26px 0 30px}.stat{background:white;border:1px solid var(--line);border-radius:11px;padding:17px 20px;display:flex;align-items:center;gap:14px}.stat-icon{border-radius:10px;width:39px;height:39px;display:grid;place-items:center;background:#eef1f9;color:#6174a5;font-size:18px}.stat:nth-child(2) .stat-icon{background:#f1edf8;color:var(--purple)}.stat:nth-child(3) .stat-icon{background:var(--green);color:var(--accent)}.stat strong{font-size:22px;line-height:1.1;font-weight:600}.stat span{display:block;font-size:12px;color:var(--muted);margin-top:3px}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:18px;flex-wrap:wrap}.week-nav{display:flex;align-items:center;gap:8px}.week-nav h2{font-size:18px;font-weight:600;min-width:220px;margin:0 10px 0 0}.arrow{font-size:20px;line-height:1;padding:9px 13px}.tools{display:flex;align-items:center;gap:10px}.tools input{max-width:150px;border:1px solid var(--line);padding:8px;border-radius:7px;background:white}.calendar-scroll{overflow-x:auto;padding-bottom:10px}.calendar{display:grid;grid-template-columns:repeat(7,minmax(145px,1fr));gap:10px;min-width:1080px}.day{background:#eef0f3;border:1px solid #e6e9ed;border-radius:10px;min-height:380px;padding:10px;display:flex;flex-direction:column;gap:10px}.day.today{border-color:#9aaf97;background:#eff3ed}.day-head{display:flex;align-items:center;justify-content:space-between;padding:3px 3px 8px}.day-head span{font-size:11px;font-weight:650;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}.day-head strong{font-size:17px;font-weight:500;width:29px;height:29px;text-align:center;line-height:29px}.today .day-head strong{border-radius:50%;color:white;background:var(--accent)}.block{background:white;border:1px solid #dde3e9;border-top:3px solid #839bc9;border-radius:7px;padding:12px 11px;box-shadow:0 2px 3px #26344804}.block.recitation{border-top-color:#a18ac5}.block.done{opacity:.67}.block.done h3{text-decoration:line-through}.block-head{display:flex;justify-content:space-between;align-items:center;gap:4px}.kind{font-size:9px;letter-spacing:.8px;font-weight:700;text-transform:uppercase;color:#637da8}.recitation .kind{color:#8a6baa}.edit{padding:0 4px;background:none;border:0;font-size:16px;color:var(--muted)}.course{font-size:11px;font-weight:600;color:var(--muted);margin-top:8px;overflow-wrap:anywhere}h3{font-size:14px;line-height:1.4;margin:3px 0 7px;overflow-wrap:anywhere}.time,.notes{font-size:11px;color:var(--muted);white-space:pre-wrap;overflow-wrap:anywhere}.notes{margin-top:8px}.resources{display:grid;gap:5px;margin-top:10px;padding-top:9px;border-top:1px solid #edf0f3}.resource{display:flex;align-items:center;gap:3px;min-width:0}.resource a{color:#536c96;font-size:11px;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}.resource a:hover{text-decoration:underline}.copy{padding:0 3px;border:0;background:transparent;font-size:11px;color:var(--muted)}.complete{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--muted);margin-top:12px;cursor:pointer}.complete input{accent-color:var(--accent);margin:0}.add-day{border:1px dashed #ccd3da;color:#8a949f;background:transparent;font-size:11px;padding:8px;margin-top:auto}.empty{font-size:11px;text-align:center;color:#9aa2ac;padding:24px 0;flex:1}.bottom{display:flex;align-items:center;justify-content:space-between;margin-top:14px;gap:16px;color:var(--muted);font-size:11px}.legend{display:flex;gap:16px}.legend i{display:inline-block;width:6px;height:6px;border-radius:50%;background:#839bc9;margin-right:6px}.legend span:last-child i{background:#a18ac5}dialog{border:1px solid var(--line);border-radius:16px;padding:0;width:590px;max-width:calc(100% - 28px);max-height:90vh;box-shadow:0 20px 80px #15222b30}dialog::backdrop{background:#1c283d66;backdrop-filter:blur(3px)}.modal-head{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--line)}.modal-head h2{margin:0;font-size:21px;font-weight:600}.modal-body{padding:20px 24px;display:grid;gap:15px}.field{display:grid;gap:6px;font-size:12px;font-weight:600}.field input,.field select,.field textarea{width:100%;border:1px solid #d9dfe5;border-radius:7px;padding:9px 10px;background:white;color:var(--ink);font-weight:400}.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.hint{font-size:11px;color:var(--muted);font-weight:400}.resource-row{display:grid;grid-template-columns:1fr 1.6fr auto;gap:7px;margin-top:7px}.resource-row input{min-width:0;padding:8px;font-size:12px;border:1px solid #d9dfe5;border-radius:6px}.resource-row button{padding:4px 9px}.modal-footer{padding:16px 24px;border-top:1px solid var(--line);display:flex;gap:9px;justify-content:flex-end}.danger{color:#b14848;margin-right:auto}.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#263b2e;color:white;padding:11px 20px;border-radius:8px;box-shadow:0 4px 24px #0002;z-index:10;max-width:90%;font-size:13px}.storage-error{padding:12px;background:#fff0d8;border:1px solid #e8c789;border-radius:8px;margin-bottom:16px}.hidden{display:none!important}@media(min-width:1600px){.calendar{gap:14px}.day{min-height:470px}}@media(max-width:1000px){.shell{grid-template-columns:180px minmax(0,1fr)}aside{padding:24px 14px}main{padding:26px 22px}.stat{padding:14px 12px}.stat-icon{display:none}.week-nav h2{min-width:0;font-size:16px}}@media(max-width:650px){.shell{display:block}aside{padding:15px 18px;border-right:0;border-bottom:1px solid var(--line);gap:14px}.brand{font-size:21px}.nav-active,.side-note,.side-courses .section-label{display:none}.course-list{display:flex;overflow-x:auto}.course-list button{white-space:nowrap;flex-shrink:0}.side-courses{min-width:0}main{padding:24px 16px}.topline{margin-bottom:18px}.intro{align-items:flex-start}h1{font-size:28px}.subtitle{font-size:12px}.overview{gap:8px;margin:22px 0}.stat{padding:12px}.stat span{font-size:10px}.toolbar{gap:12px}.week-nav{flex-wrap:wrap}.week-nav h2{flex-basis:100%}.two{gap:10px}.bottom{align-items:flex-start}.resource-row{grid-template-columns:1fr auto}.resource-row input:nth-child(2){grid-row:2;grid-column:1/3}.resource-row button{grid-column:2;grid-row:1}.modal-body{padding:18px}.modal-footer{padding:16px}.backup-mobile{display:inline!important}}@media print{aside,.tools,.add-day,.edit,.topline,.intro button,.bottom,.complete,.copy{display:none!important}.shell{display:block}main{padding:0}.calendar{min-width:0;grid-template-columns:repeat(7,1fr);gap:4px}.day{padding:4px;min-height:260px}.block{break-inside:avoid;padding:6px}.overview{margin:12px 0}.stat{padding:8px}.block.done{opacity:1}body{font-size:11px}}
+
+aside{border-right:0;border-inline-end:1px solid var(--line)}
+.course-list button{text-align:start}.section-label,.eyebrow,.kind,.day-head span{letter-spacing:0}
+h1{letter-spacing:0}.week-nav h2{margin:0;margin-inline-end:10px}
+.danger{margin-right:0;margin-inline-end:auto}.legend i{margin-right:0;margin-inline-end:6px}
+.course,.notes,h3{unicode-bidi:plaintext;text-align:start}.resource a{unicode-bidi:plaintext}
+input[type=date],input[type=time],.resource-row input:nth-child(2),#weekTitle,#completedCount{direction:ltr;unicode-bidi:isolate}
+.semester{background:#eaf1e8;border:1px solid #d7e3d3;border-radius:10px;padding:15px 18px;margin-bottom:22px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.semester strong{font-size:17px;color:#425d43}.semester p{font-size:11px;color:#687b65;margin-top:4px}
+.semester-dates{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.semester-dates label{font-size:11px;display:grid;gap:4px;color:#53674e}
+.semester-dates input{padding:6px 8px;border:1px solid #ccd9c7;border-radius:6px;background:#ffffffb8;max-width:145px;font:inherit}
+.day.outside-semester{background:#e9ebee}.day.outside-semester .day-head{opacity:.55}
+@media(max-width:650px){aside{border-inline-end:0}.semester{padding:12px}.semester-dates{gap:8px}}
+@media print{.semester-dates{display:none}}
+
+.arrow{direction:ltr;unicode-bidi:isolate}
+.course-pool-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
+.course-pool-head .section-label{margin:0}.course-pool-head button{font-size:11px;padding:5px 8px;white-space:nowrap}
+.pool-empty{font-size:11px;color:var(--muted);padding:8px 4px}.course-count{font-size:11px;color:var(--muted);margin-top:8px}
+#coursePoolNames{line-height:1.8;min-height:210px;resize:vertical}
+@media(max-width:650px){.side-courses .course-pool-head .section-label{display:block}.course-pool-head{margin-bottom:6px}}
+.day.holiday{background:#f5eee1;border-color:#ddceae}.holiday-label{color:#8c7041;font-size:11px;text-align:center;padding:4px;border-radius:4px;background:#eee2cb}
+
+.block,.block.recitation{border-top-color:var(--course-color,#839bc9);background:linear-gradient(var(--course-tint,#ffffff),var(--course-tint,#ffffff)),#fff}
+.block .kind,.block.recitation .kind{color:#65717d}.block .course{display:flex;align-items:center;gap:6px;color:#596572}
+.block .course .dot{background:var(--course-color);width:7px;height:7px}
+.color-choices{display:grid;gap:8px;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:12px}
+.color-choice{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:12px;overflow-wrap:anywhere}
+.color-choice input[type=color]{flex-shrink:0;width:32px;height:30px;padding:2px;border:1px solid var(--line);border-radius:6px;background:#fff;cursor:pointer}
+@media(max-width:450px){.color-choices{grid-template-columns:1fr}}
+@media print{.block{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+.exam-only-label{font-size:11px;text-align:center;padding:4px;border:1px dashed #62969a;color:#396e74;border-radius:4px;background:transparent}
+.day.weekend{background:#e5e9f3;border-color:#cbd3e5}
+.day.weekend.today{border-color:#9aaf97}
+.day.weekend.holiday{background:#f5eee1;border-color:#ddceae}
+.weekend-label{font-size:11px;text-align:center;color:#5e6d8d;padding:4px;background:#d9e0ee;border-radius:4px}
+@media print{.day.weekend,.day.holiday{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+@media screen{
+main{padding:24px 28px}
+.topline{margin-bottom:14px}
+h1{font-size:24px;margin:3px 0}
+.subtitle{font-size:12px}
+.intro{gap:14px}
+.overview{gap:10px;margin:16px 0 18px}
+.stat{padding:9px 13px;gap:10px;border-radius:9px}
+.stat-icon{width:28px;height:28px;font-size:15px;border-radius:7px}
+.stat>div:last-child{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.stat strong{font-size:18px;line-height:1.2;white-space:nowrap}
+.stat span{font-size:11px;margin-top:0}
+.semester{padding:11px 14px;margin-bottom:16px;gap:12px}
+.semester strong{font-size:15px}
+.toolbar{margin-bottom:12px;gap:12px}
+.week-nav h2{font-size:16px}
+.day{padding:8px;gap:7px;min-height:320px}
+.day-head{padding:2px 2px 5px}
+.day-head strong{font-size:15px;width:26px;height:26px;line-height:26px}
+.block{padding:8px;border-radius:6px}
+.block .course{margin-top:4px}
+.block h3{font-size:12px;line-height:1.35;margin:2px 0 5px}
+.block .notes{margin-top:5px}
+.block .resources{gap:4px;margin-top:6px;padding-top:5px}
+.block .complete{margin-top:7px}
+.modal-head h2{font-size:19px}
+}
+@media screen and (min-width:1600px){.calendar{gap:10px}.day{min-height:380px}}
+@media screen and (max-width:650px){
+main{padding:18px 14px}
+h1{font-size:22px}
+.overview{gap:7px;margin:14px 0}
+.stat{padding:8px;gap:6px}
+.stat>div:last-child{gap:3px 6px}
+.stat strong{font-size:17px}
+.stat span{font-size:10px}
+.week-nav h2{font-size:15px}
+}
+.repeat-panel{padding:12px;border:1px solid var(--line);border-radius:8px;background:#f6f8f5}
+.repeat-panel .complete{margin:0;font-size:12px;color:var(--ink)}
+.repeat-options{display:grid;gap:10px;margin-top:12px}.repeat-options input[type=date]{max-width:180px}
+.repeat-existing{margin-top:10px;display:grid;gap:8px}.repeat-existing button{justify-self:start;font-size:12px;color:#a14c40}
+.repeat-mark{font-size:12px;margin-inline-start:5px;color:#687b65}
+
+@media screen{
+html,body{height:100%;overflow:hidden}
+.shell{height:100vh;height:100dvh;min-height:0;overflow:hidden}
+aside{min-height:0;overflow-y:auto}aside>*{flex-shrink:0}
+main{height:100%;min-height:0;margin:0 auto;display:flex;flex-direction:column;overflow-y:auto}
+main>*{flex-shrink:0}
+.calendar-scroll{flex:1 0 160px;min-height:160px;overflow-x:auto;overflow-y:hidden;padding-bottom:10px}
+.calendar{height:100%;grid-template-rows:minmax(0,1fr)}
+.day{height:100%;min-height:0;overflow:hidden}
+.day-head,.day>.holiday-label,.day>.weekend-label,.day>.exam-only-label,.day>.add-day{flex-shrink:0}
+.day-events{flex:1;min-height:0;display:flex;flex-direction:column;gap:7px;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:#aab5c2 transparent;scrollbar-gutter:stable;overscroll-behavior-y:contain;padding-inline-end:3px}
+.day-events>.block{flex-shrink:0}
+.day-events:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;border-radius:4px}
+.day>.add-day{margin-top:0}
+.bottom{margin-top:8px;font-size:10px}
+}
+@media screen and (max-width:650px){
+.shell{display:flex;flex-direction:column}
+aside{max-height:150px;flex-shrink:0;padding:10px 14px;gap:8px}
+main{height:auto;flex:1;min-height:0}
+.calendar-scroll{flex-basis:180px;min-height:180px}
+}
+.block.untitled .kind{font-size:12px;font-weight:600}
+.block[data-materials]{cursor:pointer}.block[data-materials]:hover{box-shadow:0 2px 8px #26344820}
+.block[data-materials]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.materials-heading{display:grid;gap:3px;min-width:0}.materials-heading p{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+#materialLinks{display:grid;gap:8px}#materialLinks .resource{padding:9px;border:1px solid var(--line);border-radius:7px}
+#materialLinks .resource a{font-size:13px}#materialLinks .copy{padding:4px 8px;font-size:15px}
+.material-edit summary{cursor:pointer;font-size:12px;font-weight:600;padding:6px 0}
+
+.page-nav{display:grid;gap:6px}.page-nav button{text-align:start;border:0;background:transparent;padding:10px 12px}.page-nav .nav-active{background:var(--green);color:#425d43;font-weight:600}
+.prep-course-label{display:grid;gap:4px;font-size:11px;color:var(--muted);min-width:180px;max-width:280px}.prep-course-label select{padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:white;color:var(--ink);min-width:0;width:100%}
+.prep-overview{grid-template-columns:1fr 1.6fr}.exam-date-label{display:grid;gap:3px;font-size:10px;color:var(--muted);margin-inline-start:auto}.exam-date-label input{font:inherit;color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:5px 8px;background:white}
+.prep-grid{flex:1 0 240px;min-height:240px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:minmax(0,1fr);gap:16px;padding-bottom:4px}
+.prep-panel{min-height:0;min-width:0;border:1px solid var(--line);border-radius:11px;background:white;display:flex;flex-direction:column;overflow:hidden}
+.prep-panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:17px 18px;border-bottom:1px solid var(--line);flex-shrink:0}.prep-panel-head h2{font-size:16px;margin:0 0 3px;font-weight:600}.prep-panel-head button{font-size:12px;padding:8px 10px}
+.solved-list{overflow-y:auto;min-height:0;flex:1;padding:12px;display:flex;flex-direction:column;gap:10px;scrollbar-width:thin;overscroll-behavior:contain}
+.solved-entry{border:1px solid var(--line);border-inline-start:3px solid var(--entry-color,var(--accent));border-radius:7px;padding:12px;flex-shrink:0}
+.solved-entry-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.solved-entry h3{font-size:13px;margin:0 0 3px}.solved-entry time{font-size:11px;color:var(--muted)}.solved-entry-actions{display:flex;gap:4px;flex-shrink:0}.solved-entry-actions button{font-size:11px;padding:4px 7px}.solved-entry p{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere;margin-top:8px;color:#64717c;unicode-bidi:plaintext}
+.prep-list-empty{margin:auto;text-align:center;color:var(--muted);font-size:12px;padding:30px 15px}.prep-list-empty strong{display:block;color:#536b55;font-size:15px;margin-bottom:6px}#prepEmpty{margin-top:16px}
+@media(max-width:900px){.prep-overview{grid-template-columns:1fr 1.5fr}.prep-overview .stat{flex-wrap:wrap}.exam-date-label{flex-basis:100%;margin-inline-start:0}}
+@media(max-width:650px){.page-nav{display:flex;gap:5px}.page-nav button{font-size:12px;padding:7px 10px}.prep-course-label{min-width:140px;max-width:45%}.prep-grid{grid-template-columns:1fr;grid-template-rows:minmax(230px,1fr) 120px;min-height:365px;gap:12px}.prep-panel-head{padding:12px}.prep-panel-head h2{font-size:14px}.prep-overview{gap:8px}.prep-overview .stat{align-content:start}.solved-entry{padding:10px}}
+@media print{.page-nav,.solved-entry-actions,#addSolvedExam{display:none}.prep-grid{display:grid;grid-template-rows:auto}.solved-list{overflow:visible}.prep-panel{overflow:visible}}
+
+.solved-entry[data-exam-details]{cursor:pointer}.solved-entry[data-exam-details]:hover{background:#f8faf8}.solved-entry[data-exam-details]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.solved-entry-actions{flex-wrap:wrap;justify-content:flex-end;max-width:160px}.solved-entry-head>div:first-child{min-width:0}
+#examDetailsDialog{width:740px}#examDetailsDialog form{display:flex;flex-direction:column;max-height:88vh;max-height:88dvh}#examDetailsDialog .modal-body{overflow-y:auto;min-height:0}#examDetailsDialog .modal-head,#examDetailsDialog .modal-footer{flex-shrink:0}
+#examQuestionRows{display:grid;gap:12px}.exam-question{background:#f7f9f7;border:1px solid var(--line);border-radius:9px;padding:14px;display:grid;gap:12px}.exam-question-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.exam-question-head input{max-width:100px}.exam-question-head button{font-size:11px;color:#a14c40;padding:6px 9px}.exam-question textarea{resize:vertical;min-height:90px}
+.exam-question-head{display:grid;grid-template-columns:80px minmax(0,1fr) 30px;align-items:end;gap:10px}
+.exam-question-head .field{min-width:0}.exam-question-head input{max-width:none}
+.exam-question-head button{height:36px;padding:0;font-size:20px}
+@media(max-width:450px){.exam-question-head{grid-template-columns:65px minmax(0,1fr) 28px;gap:7px}}
+
+.confidence-legend{display:flex;gap:10px;flex-wrap:wrap;padding:9px 15px;border-bottom:1px solid var(--line);color:var(--muted);font-size:10px;flex-shrink:0}.confidence-legend span{display:flex;gap:5px;align-items:center}.confidence-legend i{width:9px;height:9px;border-radius:2px}
+.prep-topic{border:1px solid var(--line);border-radius:7px;padding:10px 12px;flex-shrink:0}.prep-topic-head{display:flex;align-items:flex-start;gap:7px}.prep-topic h3{font-size:13px;margin:2px 0;flex:1;min-width:0}.prep-topic-actions{display:flex;gap:4px;flex-shrink:0}.prep-topic-actions button{font-size:11px;padding:4px 7px}.confidence-button{padding:5px;border:0;background:transparent;display:flex;align-items:center;justify-content:center;min-width:26px;min-height:26px}.confidence-swatch{display:block;width:14px;height:14px;border-radius:3px;border:1px solid #00000012;background:var(--confidence-color)}
+.topic-meta{display:flex;gap:6px 10px;flex-wrap:wrap;margin-top:6px;font-size:11px;color:var(--muted)}.topic-meta span{background:#f3f5f7;border-radius:4px;padding:2px 6px}
+@media(max-width:650px){.prep-grid{grid-template-rows:repeat(2,minmax(230px,1fr));min-height:500px}.prep-topic{padding:9px}.prep-topic-actions{gap:3px}.prep-topic-actions button{padding:4px 5px}}
+.prep-topic-head{align-items:center;gap:6px}
+.prep-topic-head>.confidence-button{flex-shrink:0}
+.prep-topic-head>.topic-meta{margin:0;flex:0 1 auto;max-width:45%;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin}
+.prep-topic-head>.topic-meta span{white-space:nowrap;flex-shrink:0}
+.prep-topic-head>.topic-meta:empty{display:none}
+
+.solved-entry-actions .entry-menu-toggle,.prep-topic-actions .entry-menu-toggle{width:27px;height:27px;padding:0;font-size:21px;line-height:1;border:0;background:transparent;color:var(--muted);border-radius:5px}
+.solved-entry-actions .entry-menu-toggle:hover,.prep-topic-actions .entry-menu-toggle:hover{background:#e9edf0;color:var(--ink)}
+.entry-menu{position:fixed;z-index:50;min-width:130px;padding:5px;border:1px solid var(--line);border-radius:8px;background:#fff;box-shadow:0 8px 28px #24304426;display:grid;gap:2px}
+.entry-menu button{text-align:start;border:0;background:transparent;border-radius:5px;padding:8px 12px;font-size:12px}
+.entry-menu button:hover,.entry-menu button:focus-visible{background:#f0f3f0}.entry-menu .delete-action{color:#b14848}
+@media print{.entry-menu,.prep-topic-actions{display:none!important}}
+
+.assignment-columns{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(265px,1fr);grid-template-rows:auto minmax(0,1fr);gap:0 12px;flex:1 0 240px;min-height:240px;margin-top:18px;overflow-x:auto;padding-bottom:6px}
+.assignment-column{display:grid;grid-row:span 2;grid-template-rows:subgrid}
+.assignment-column .prep-panel-head{min-height:64px;box-sizing:border-box;background:color-mix(in srgb,var(--course-color) 30%,white);color:var(--course-header-text)}
+.assignment-column .prep-panel-head h2{flex:1;min-width:0;margin:0;overflow-wrap:anywhere}
+.assignment-column .prep-panel-head h2.compact-name{font-size:12px}
+.assignment-columns.measuring-names h2{white-space:nowrap}
+.assignment-column .prep-panel-head button{flex-shrink:0;white-space:nowrap}
+#assignmentCourseOptions{display:grid;gap:10px}
+#assignmentCourseOptions label{display:flex;align-items:center;gap:8px;overflow-wrap:anywhere}
+.assignment-item{display:flex;align-items:center;gap:9px;padding:9px;border:1px solid var(--line);border-radius:7px;flex-shrink:0}
+.assignment-copy{flex:1;min-width:0;display:grid;gap:3px}
+.assignment-copy button{border:0;background:transparent;text-align:start;padding:0;overflow-wrap:anywhere;font-weight:600}
+.assignment-copy time{font-size:11px;color:var(--muted)}
+.assignment-countdown{margin-inline-start:auto;flex-shrink:0;font-size:11px;padding:4px 6px;border-radius:5px;background:var(--green);color:#405c43}
+.assignment-countdown[data-urgency="overdue"]{background:#f9e8e5;color:#9d4037}
+.assignment-countdown[data-urgency="today"]{background:#f9efd8;color:#785711}
+.assignment-item.is-done .assignment-copy button{text-decoration:line-through;color:var(--muted)}
+#assignmentsEmpty{margin-top:16px}
+
+.assignment-controls,.calendar-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#assignmentsPage .intro{flex-wrap:wrap}
+#calendarPage .calendar-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin-bottom:8px}
+#calendarPage .calendar-actions button{width:100%;font-weight:600}
+.assignment-controls label{color:var(--muted);font-size:12px}
+.assignment-controls select{padding:8px;border:1px solid var(--line);border-radius:7px;background:white;color:var(--ink)}
+.assignment-column .prep-panel-head button{background:#fff;color:#343e4b;border:1px solid #0002}
+.assignment-column .prep-panel-head button:hover{background:#f2f4f6}
+#openPendingAssignments span,#openPendingLessons span{padding:1px 6px;margin-inline-start:4px;border-radius:10px;background:#e9edf0;color:#405062}
+.quick-view-drawer{position:fixed;inset:0 auto 0 0;margin:0;width:min(390px,100vw);max-width:100vw;height:100%;max-height:none;border-radius:0}
+.quick-view-drawer[open]{display:flex;flex-direction:column}
+.quick-view-drawer .modal-head,.quick-view-drawer .modal-footer{flex-shrink:0}
+.quick-view-drawer .assignment-copy strong{overflow-wrap:anywhere}
+.quick-view-drawer .assignment-copy small{color:var(--muted);overflow-wrap:anywhere}
+#pendingLessonsDrawer .pending-lesson-course{color:var(--ink);font-weight:700}
+.quick-view-drawer .assignment-item{background:color-mix(in srgb,var(--course-color) 12%,white)}
+.quick-view-drawer .assignment-countdown{background:white}
+@media screen{
+  #calendarPage{container-type:inline-size}
+  #calendarPage .toolbar{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:10px}
+  #calendarPage .week-nav,#calendarPage .tools,.week-jump{flex-wrap:wrap;min-width:0;gap:8px}
+  .week-jump{display:flex;align-items:center}
+  #calendarPage .tools{justify-content:flex-end}
+  #calendarPage .toolbar button{white-space:nowrap}
+  #calendarPage .week-nav h2{min-width:0}
+  #calendarPage .overview{grid-template-columns:repeat(3,minmax(0,1fr))}
+  #calendarPage .stat>div:last-child{min-width:0}
+}
+@container (max-width:680px){
+  #calendarPage .toolbar{grid-template-columns:1fr;gap:8px}
+  #calendarPage .tools{justify-content:flex-start}
+  #calendarPage .stat .stat-icon{display:none}
+  #calendarPage .stat>div:last-child{display:grid;gap:2px}
+}
+@container (max-width:410px){
+  #calendarPage .week-nav h2{flex-basis:100%;margin:0}
+  #calendarPage .stat{padding:7px}
+  #calendarPage .stat strong{font-size:15px}
+}
+@media print{.calendar-actions,#addBlock,.quick-view-drawer{display:none!important}}
+
+@media screen{
+  .day-lanes{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:4px;flex:1;min-height:0}
+  .day-lanes .day-events{padding-inline-end:0;scrollbar-gutter:auto}
+  .day-lanes .block{padding:4px;overflow-wrap:anywhere}
+  .day-lanes .block-head{gap:2px}
+  .day-lanes .complete{gap:3px}
+  .day-events > .block.all-day{flex:1 0 auto}
+  .day-events > .block.exam{flex:0 0 50%;min-height:0;overflow:auto}
+}
+.block.all-day{background:#dce0e6;border:1px solid #aab3bf}
+.block.exam{background:#f7dce7;border:1px solid #d19bb0}
+
+.calendar:has(.study-week-band){grid-template-rows:auto minmax(0,1fr)}
+.calendar:has(.study-week-band)>.day{grid-row:2}
+.study-week-band{grid-row:1;padding:7px 10px;text-align:center;border:1px solid #cad9cc;border-radius:7px;background:#e8f0e9;color:#192b20;font-size:14px;font-weight:700}
+.study-week-band:nth-child(even){background:#dce9df}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside><div class="brand"><div class="mark">▤</div><div>weeknote<small>קצת סדר. יותר בהירות.</small></div></div><div><p class="section-label">סביבת הלימודים שלך</p><nav class="page-nav" aria-label="עמודי האתר"><button type="button" id="calendarNav" class="nav-active">▦ &nbsp; יומן לימודים</button><button type="button" id="assignmentsNav">☑ &nbsp; מטלות</button><button type="button" id="examPrepNav">✓ &nbsp; הכנה למבחנים</button></nav></div><div class="side-courses"><div class="course-pool-head"><p class="section-label" id="sideCoursesTitle">קורסי הסמסטר</p><button id="manageCourses" type="button">ניהול קורסים</button></div><div id="courses" class="course-list"></div></div><div class="side-note"><strong id="saveStatus" role="status">● נשמר במכשיר הזה</strong><p style="margin-top:8px">השינויים נשמרים בדפדפן הזה. מומלץ לייצא גיבוי לשמירה בנפרד.</p><div class="backup-actions"><button data-action="export">↓ ייצוא גיבוי</button><button data-action="import">↑ ייבוא גיבוי</button></div></div></aside>
+<main id="calendarPage"><div id="storageWarning" class="storage-error hidden" role="alert"></div>
+<div class="overview"><div class="stat"><div class="stat-icon">▤</div><div><strong id="lectureCount">0</strong><span>הרצאות השבוע</span></div></div><div class="stat"><div class="stat-icon">✎</div><div><strong id="recitationCount">0</strong><span>תרגולים השבוע</span></div></div><div class="stat"><div class="stat-icon">✓</div><div><strong id="completedCount">0 / 0</strong><span>סטטוס</span></div></div></div>
+
+<div class="calendar-actions"><button type="button" id="openPendingAssignments" aria-haspopup="dialog">מטלות פתוחות <span id="pendingAssignmentCount">0</span></button><button type="button" id="openPendingLessons" aria-haspopup="dialog">הרצאות ותרגולים להשלמה <span id="pendingLessonCount">0</span></button></div>
+<div class="toolbar"><div class="week-nav"><h2 id="weekTitle"></h2><button class="arrow" id="previous" aria-label="השבוע הקודם">›</button><button class="arrow" id="next" aria-label="השבוע הבא">‹</button><div class="week-jump"><label class="hint" for="jump">מעבר לתאריך</label><input type="date" id="jump" aria-label="מעבר לתאריך"></div></div><div class="tools"><button type="button" id="manageHolidays">חופשות ומבחנים</button><button type="button" id="editSemester">עריכת תאריכי הסמסטר</button><button class="primary" id="addBlock">＋ הוספת אירוע</button></div></div>
+<div class="calendar-scroll"><div id="calendar" class="calendar"></div></div><div class="bottom"><div class="legend"><span>צבע המפגש מציין את הקורס · סוג המפגש מופיע בכותרת</span></div><span>כל השבועות נשמרים גם כשעוברים ביניהם.</span><span class="backup-mobile hidden"><button data-action="export">ייצוא</button><button data-action="import">ייבוא</button></span></div>
+</main>
+<main id="examPrepPage" class="hidden"><div class="intro"><div><h1>הכנה למבחנים</h1><p class="subtitle">המבחנים שפתרת והזמן שנותר עד למבחן הבא.</p></div><label class="prep-course-label">קורס<select id="prepCourseSelect" aria-label="בחירת קורס למעקב הכנה"></select></label></div><div id="prepEmpty" class="storage-error hidden">כדי להתחיל, הוסיפי קורס דרך ״ניהול קורסי מבחנים״ שבצד. הרשימה הזו נפרדת מקורסי הסמסטר.</div><div class="overview prep-overview"><div class="stat"><div class="stat-icon">✓</div><div><strong id="solvedExamCount" aria-live="polite">0</strong><span>מבחנים שפתרתי</span></div></div><div class="stat"><div class="stat-icon">◷</div><div><strong id="examCountdown" aria-live="polite">—</strong><span id="examCountdownLabel">ימים עד המבחן</span></div><label class="exam-date-label">תאריך המבחן<input id="prepExamDate" type="date" aria-label="תאריך המבחן בקורס הנבחר"></label></div></div><div class="prep-grid"><section id="solvedPanel" class="prep-panel" aria-labelledby="solvedPanelTitle"><div class="prep-panel-head"><div><h2 id="solvedPanelTitle">מבחנים שפתרתי</h2><p id="prepCourseName" class="hint"></p></div><button type="button" id="addSolvedExam" class="primary">＋ הוספת מבחן</button></div><div id="solvedExamList" class="solved-list" tabindex="0" role="region" aria-label="רשימת המבחנים שפתרתי"></div></section><section class="prep-panel" aria-labelledby="topicPanelTitle"><div class="prep-panel-head"><div><h2 id="topicPanelTitle">נושאים בקורס</h2><p class="hint" id="topicPanelCount">רשימת נושאים ורמת הביטחון שלך</p></div><button type="button" id="addPrepTopic" class="primary">＋ הוספת נושא</button></div><div id="prepTopicList" class="solved-list" tabindex="0" role="region" aria-label="רשימת נושאים בקורס"></div></section></div></main>
+<main id="assignmentsPage" class="hidden">
+  <div class="intro"><div><h1>מטלות</h1><p class="subtitle">מטלות ומועדי הגשה לפי קורסי הסמסטר.</p></div><div class="assignment-controls"><label for="assignmentStatus">מצב מטלות</label><select id="assignmentStatus"><option value="all">הכול</option><option value="pending">פתוחות</option><option value="finished">הושלמו</option></select><button type="button" id="manageAssignmentCourses">הצגת קורסים</button></div></div>
+  <p id="assignmentsEmpty" class="storage-error hidden">הוסיפי קורס דרך ״ניהול קורסים״ כדי להתחיל.</p>
+  <div id="assignmentColumns" class="assignment-columns"></div>
+</main></div>
+<dialog id="editor"><form id="blockForm"><div class="modal-head"><h2 id="modalTitle">הוספת אירוע לימוד</h2><button type="button" id="closeDialog" aria-label="סגירה">×</button></div><div class="modal-body"><div class="two"><label class="field">קורס<input id="course" dir="auto" required maxlength="100" placeholder="למשל: אלגברה לינארית" list="courseSuggestions"></label><label class="field">סוג<select id="kind"><option value="lecture">הרצאה</option><option value="recitation">תרגול</option><option value="lab">מעבדה</option><option value="all-day">אירוע יום שלם</option><option value="exam">מבחן</option></select></label></div><datalist id="courseSuggestions"></datalist><label class="field" id="eventNumberField">מספר מפגש <span class="hint">לא חובה</span><input type="number" id="eventNumber" min="1" max="9999" step="1" inputmode="numeric" dir="ltr" placeholder="למשל: 4"></label><label class="field">כותרת / נושא <span class="hint">אפשר להשאיר ריק — יוצג רק סוג האירוע והמספר, בלי כותרת נוספת</span><input id="topic" dir="auto" maxlength="200" placeholder="לא חובה, למשל: מרחבים וקטוריים"></label><div class="two"><label class="field">תאריך<input type="date" id="blockDate" required></label></div><div class="two" id="eventTimeFields"><label class="field">שעת התחלה <span class="hint">לא חובה</span><input type="time" id="blockTime"></label><label class="field">שעת סיום <span class="hint">לא חובה</span><input type="time" id="blockEndTime"></label></div><section class="repeat-panel" aria-label="אירוע מחזורי"><label class="complete"><input type="checkbox" id="repeatWeekly">אירוע מחזורי — חזרה בכל שבוע</label><div id="repeatOptions" class="repeat-options hidden"><label class="field">חזרה עד לתאריך <input type="date" id="repeatUntil"></label><label class="complete"><input type="checkbox" id="skipRepeatHolidays" checked>דילוג על ימים ללא לימודים וללא מבחנים</label><label class="complete"><input type="checkbox" id="copyRepeatMaterials">העתקת ההערות והקישורים גם לחזרות החדשות</label><p class="hint">המספר עולה ב־1 בכל אירוע שנוצר. ללא מספר התחלתי, הסדרה מתחילה ב־1. לכל חזרה סימון השלמה נפרד.</p><p class="hint" id="repeatPreview" aria-live="polite"></p></div><div id="repeatExisting" class="repeat-existing hidden"><p class="hint" id="repeatExistingHint"></p><p class="hint">השינויים כאן חלים על האירוע הזה בלבד. כל חזרה ניתנת לעריכה ולהשלמה בנפרד.</p><button type="button" id="stopRepeats">ביטול החזרות הבאות</button></div></section><label class="field">הערות<textarea id="notes" dir="auto" rows="3" maxlength="5000" placeholder="רעיונות מרכזיים, תרגילים או תזכורת להמשך…"></textarea></label><div><p style="font-size:12px;font-weight:600">חומרי לימוד</p><p class="hint">אפשר להוסיף קישורים להקלטות, מצגות ואתרים, או נתיב מלא לקובץ או לתיקייה במחשב.</p><div id="resourceRows"></div><button type="button" id="addResource" style="margin-top:9px;font-size:12px">＋ הוספת חומר לימוד</button><p class="hint" style="margin-top:9px">לקבצים מקומיים, יש להדביק נתיב מלא כגון <bdi dir="ltr">C:\Study\lecture.pdf</bdi>. אם הדפדפן חוסם את הפתיחה, אפשר להעתיק את הנתיב ולהדביק בסייר הקבצים.</p></div><label id="eventCompletionField" class="complete" style="font-size:12px;margin:0"><input type="checkbox" id="reviewed">הייתי/השלמתי</label><p id="formError" role="alert" style="color:#ad3535;font-size:12px"></p></div><div class="modal-footer"><button type="button" id="deleteBlock" class="danger hidden">מחיקת מפגש</button><button type="button" id="cancelDialog">ביטול</button><button class="primary" type="submit">שמירת מפגש</button></div></form></dialog>
+<dialog id="materialsDialog" aria-labelledby="materialsTitle"><form id="materialsForm"><div class="modal-head"><div class="materials-heading"><h2 id="materialsTitle">הערות וחומרי לימוד</h2><p id="materialsEvent"></p></div><button type="button" id="closeMaterials" aria-label="סגירה">×</button></div><div class="modal-body"><label class="field">הערות<textarea id="materialNotes" dir="auto" rows="6" maxlength="5000" placeholder="הוסיפי הערות לאירוע…"></textarea></label><section aria-label="חומרי לימוד"><p style="font-size:12px;font-weight:600;margin-bottom:8px">חומרי לימוד</p><div id="materialLinks"></div><details id="materialEditing" class="material-edit"><summary>הוספה ועריכה של קישורים</summary><div id="materialRows"></div><button type="button" id="addMaterial" style="margin-top:9px;font-size:12px">＋ הוספת חומר לימוד</button><p class="hint" style="margin-top:8px">אפשר להזין כתובת אתר או נתיב מקומי מלא. אם קובץ מקומי לא נפתח, אפשר להעתיק את הנתיב לסייר הקבצים.</p></details></section><p id="materialsError" role="alert" style="color:#ad3535;font-size:12px"></p></div><div class="modal-footer"><button type="button" id="cancelMaterials">ביטול</button><button type="submit" class="primary">שמירת הערות וחומרים</button></div></form></dialog>
+<dialog id="solvedExamDialog" aria-labelledby="solvedExamTitle"><form id="solvedExamForm"><div class="modal-head"><div class="materials-heading"><h2 id="solvedExamTitle">הוספת מבחן שפתרתי</h2><p id="solvedExamCourse"></p></div><button type="button" id="closeSolvedExam" aria-label="סגירה">×</button></div><div class="modal-body"><label class="field">שם / פרטי המבחן<input id="solvedExamName" dir="auto" maxlength="200" required placeholder="למשל: מבחן 2024 — מועד א׳"></label><label class="field">תאריך הפתרון <span class="hint">לא חובה</span><input id="solvedExamDate" type="date"></label><label class="field">הערות <span class="hint">לא חובה</span><textarea id="solvedExamNotes" dir="auto" rows="4" maxlength="5000" placeholder="מה הלך טוב, ועל מה כדאי לחזור…"></textarea></label><p id="solvedExamError" role="alert" style="color:#ad3535;font-size:12px"></p></div><div class="modal-footer"><button type="button" id="cancelSolvedExam">ביטול</button><button type="submit" class="primary">שמירת מבחן</button></div></form></dialog>
+<dialog id="examDetailsDialog" aria-labelledby="examDetailsTitle"><form id="examDetailsForm"><div class="modal-head"><div class="materials-heading"><h2 id="examDetailsTitle">פירוט שאלות במבחן</h2><p id="examDetailsCourse"></p></div><button type="button" id="closeExamDetails" aria-label="סגירה">×</button></div><div class="modal-body"><p class="hint">לכל שאלה אפשר לשמור נושא והערות חשובות. המידע נשמר בנפרד למבחן הזה.</p><div id="examQuestionRows"></div><button type="button" id="addExamQuestion">＋ הוספת שאלה</button><p id="examDetailsError" role="alert" style="color:#ad3535;font-size:12px"></p></div><div class="modal-footer"><button type="button" id="cancelExamDetails">ביטול</button><button type="submit" class="primary">שמירת פירוט המבחן</button></div></form></dialog>
+<dialog id="prepTopicDialog" aria-labelledby="prepTopicTitle"><form id="prepTopicForm"><div class="modal-head"><div class="materials-heading"><h2 id="prepTopicTitle">הוספת נושא</h2><p id="prepTopicCourse"></p></div><button type="button" id="closePrepTopic" aria-label="סגירה">×</button></div><div class="modal-body"><label class="field">נושא / תחום<input id="prepTopicName" dir="auto" maxlength="200" required placeholder="למשל: מרחבים וקטוריים"></label><div class="two"><label class="field">מספרי הרצאות <span class="hint">לא חובה · אפשר כמה מספרים, מופרדים בפסיק</span><input id="prepTopicLectures" dir="ltr" maxlength="1000" placeholder="1, 3, 4"></label><label class="field">מספרי תרגולים <span class="hint">לא חובה · אפשר כמה מספרים, מופרדים בפסיק</span><input id="prepTopicTutorials" dir="ltr" maxlength="1000" placeholder="2, 3"></label></div><label class="field">רמת הביטחון שלי בנושא<select id="prepTopicConfidence"><option value="unrated">אפור — טרם הוערך</option><option value="low">אדום — נמוך</option><option value="medium">צהוב — בינוני</option><option value="high">ירוק — גבוה</option></select></label><p class="hint">אפשר לשנות את רמת הביטחון גם בלחיצה על ריבוע הצבע ברשימה.</p><p id="prepTopicError" role="alert" style="color:#ad3535;font-size:12px"></p></div><div class="modal-footer"><button type="button" id="cancelPrepTopic">ביטול</button><button type="submit" class="primary">שמירת נושא</button></div></form></dialog>
+<dialog class="quick-view-drawer" id="pendingAssignmentsDrawer" aria-labelledby="pendingAssignmentsTitle">
+  <div class="modal-head"><h2 id="pendingAssignmentsTitle">מטלות פתוחות</h2><button type="button" id="closePendingAssignments" aria-label="סגירה">×</button></div>
+  <div id="pendingAssignmentsList" class="solved-list" tabindex="0" role="region" aria-label="רשימת מטלות פתוחות"></div>
+  <div class="modal-footer"><button type="button" id="goToAssignments">לכל המטלות</button></div>
+</dialog>
+<dialog class="quick-view-drawer" id="pendingLessonsDrawer" aria-labelledby="pendingLessonsTitle">
+  <div class="modal-head"><h2 id="pendingLessonsTitle">הרצאות ותרגולים להשלמה</h2><button type="button" id="closePendingLessons" aria-label="סגירה">×</button></div>
+  <div id="pendingLessonsList" class="solved-list" tabindex="0" role="region" aria-label="רשימת הרצאות ותרגולים להשלמה"></div>
+</dialog>
+<dialog id="semesterDialog" aria-labelledby="semesterDialogTitle">
+  <form id="semesterForm">
+    <div class="modal-head"><h2 id="semesterDialogTitle">עריכת תאריכי הסמסטר</h2><button type="button" id="closeSemester" aria-label="סגירה">×</button></div>
+    <div class="modal-body">
+      <label class="field">תחילת הסמסטר<input type="date" id="semesterStart" required></label>
+      <label class="field">סיום הסמסטר<input type="date" id="semesterEnd" required></label>
+      <p id="semesterHint" class="hint"></p>
+      <p id="semesterError" role="alert" style="color:#ad3535"></p>
+    </div>
+    <div class="modal-footer"><button type="button" id="cancelSemester">ביטול</button><button type="submit" class="primary">שמירה</button></div>
+  </form>
+</dialog>
+<dialog id="assignmentCoursesDialog" aria-labelledby="assignmentCoursesTitle">
+  <div class="modal-head"><h2 id="assignmentCoursesTitle">קורסים בעמוד המטלות</h2><button type="button" id="closeAssignmentCourses" aria-label="סגירה">×</button></div>
+  <div class="modal-body"><p class="hint">סמני את הקורסים שתרצי להציג.</p><div id="assignmentCourseOptions"></div></div>
+</dialog>
+<dialog id="assignmentDialog" aria-labelledby="assignmentTitle">
+<form id="assignmentForm">
+  <div class="modal-head"><div class="materials-heading"><h2 id="assignmentTitle">הוספת מטלה</h2><p id="assignmentCourse"></p></div><button type="button" id="closeAssignment" aria-label="סגירה">×</button></div>
+  <div class="modal-body">
+    <label class="field">שם המטלה<input id="assignmentName" required maxlength="200" dir="auto"></label>
+    <label class="field">תאריך הגשה<input type="date" id="assignmentDue" required></label>
+    <p id="assignmentError" role="alert" style="color:#ad3535"></p>
+  </div>
+  <div class="modal-footer"><button type="button" class="danger hidden" id="deleteAssignment">מחיקה</button><button type="button" id="cancelAssignment">ביטול</button><button type="submit" class="primary">שמירה</button></div>
+</form>
+</dialog>
+<dialog id="confirmDialog"><div class="modal-head"><h2 id="confirmTitle"></h2></div><div class="modal-body"><p id="confirmText"></p></div><div class="modal-footer"><button id="confirmNo">ביטול</button><button id="confirmYes" class="primary">המשך</button></div></dialog>
+<dialog id="coursePoolDialog"><form id="coursePoolForm"><div class="modal-head"><h2 id="coursePoolTitle">הקורסים שלי בסמסטר</h2><button type="button" id="closeCoursePool" aria-label="סגירה">×</button></div><div class="modal-body"><p class="hint" id="coursePoolIntro">רשימת קורסי הסמסטר נפרדת מרשימת הקורסים להכנה למבחנים.</p><label class="field">שמות הקורסים — קורס אחד בכל שורה<textarea id="coursePoolNames" dir="auto" rows="9" placeholder="אלגברה לינארית&#10;חדו״א 1&#10;מבוא למדעי המחשב"></textarea></label><p class="hint" id="coursePoolHelp">שינוי הרשימה אינו משנה אירועים קיימים.</p><div><p style="font-size:12px;font-weight:600">צבעי הקורסים</p><p class="hint">לכל קורס מוקצה צבע אוטומטית. אפשר ללחוץ על הדוגמית כדי לשנות אותו. הצבע נשמר לכל המפגשים של הקורס.</p><div id="courseColorChoices" class="color-choices"></div></div><p id="coursePoolError" role="alert" style="color:#ad3535;font-size:12px"></p></div><div class="modal-footer"><button type="button" id="cancelCoursePool">ביטול</button><button type="submit" class="primary">שמירת רשימת הקורסים</button></div></form></dialog>
+<dialog id="holidaysDialog"><form id="holidaysForm"><div class="modal-head"><h2>חופשות והגבלות מבחנים</h2><button type="button" id="closeHolidays" aria-label="סגירה">×</button></div><div class="modal-body"><p class="hint">תא צבוע בלוח המקורי מציין שאין לימודים ואין מבחנים. רק ימים אלה מדולגים במספור. ימים שבהם מצוין שאין מבחנים בלבד נספרים כרגיל.</p><label class="field">ללא לימודים וללא מבחנים — לא נספרים בסמסטר<textarea id="holidayDates" dir="ltr" rows="9" placeholder="2026-12-09&#10;2026-12-10"></textarea></label><p class="hint">לפי התאים הצבועים: 9–11 בדצמבר, 25 בדצמבר ו־1 בינואר. יש להזין תאריך אחד בכל שורה בפורמט YYYY-MM-DD. תאריכים מחוץ לסמסטר אינם משפיעים על המספור.</p><label class="field">ללא מבחנים בלבד — הלימודים ומספור השבועות נמשכים<textarea id="noExamDates" dir="ltr" rows="6" placeholder="2026-12-18&#10;2026-12-24 | 16:30"></textarea></label><p class="hint">תאריך אחד בכל שורה. להגבלה משעה מסוימת, יש להוסיף | ושעה, למשל 2026-12-24 | 16:30. ערבי החגים ב־24 וב־31 בדצמבר אינם ימי חופשה מלאים.</p><p id="holidaysError" role="alert" style="color:#ad3535;font-size:12px"></p></div><div class="modal-footer"><button type="button" id="cancelHolidays">ביטול</button><button type="submit" class="primary">שמירת ההגבלות</button></div></form></dialog>
+<div id="entryMenu" class="entry-menu hidden" role="menu" aria-label="אפשרויות אירוע"></div>
+<input type="file" id="importFile" accept="application/json,.json" hidden><div id="toast" class="toast hidden" role="status"></div>
+<script>
+'use strict';
+const $=id=>document.getElementById(id),KEY='weeknote-study-calendar-clean-v1';
+let data={version:1,weekStart:0,courses:[],blocks:[]},filter='',editing=null,toastTimer,confirmCallback;
+const COURSE_PALETTE=['#4778c4','#b45f40','#39896e','#9260b2','#b4892d','#b65380','#398c9e','#727d36','#6659ab','#a4584e','#427d49','#7f6781','#367da3','#a57440','#5f8490','#aa5370'];
+let courseColorDraft=[];
+const LEGACY_HOLIDAYS=['2026-12-06','2026-12-07','2026-12-08','2026-12-09','2026-12-10','2026-12-25','2027-01-01'];
+const DEFAULT_NO_EXAMS=[{date:'2026-10-04',from:''},{date:'2026-12-18',from:''},{date:'2026-12-24',from:'16:30'},{date:'2026-12-31',from:'16:30'}];
+const DEFAULT_HOLIDAYS=['2026-12-09','2026-12-10','2026-12-11','2026-12-25','2027-01-01'];
+let coursePoolContext='calendar';
+let currentPage='calendar',prepCourse='',editingSolved=null,solvedDialogCourse='';
+const DEFAULT_SEMESTER={start:'2026-10-28',end:'2027-01-27'};
+const escapeHTML=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function iso(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+function date(s){return new Date(s+'T12:00:00')}
+function addDays(d,n){const x=new Date(d);x.setDate(x.getDate()+n);return x}
+function start(d){return addDays(d,-d.getDay())}
+function validDate(s){return typeof s==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(s)&&!Number.isNaN(+date(s))&&iso(date(s))===s}
+function resourceTarget(raw){const s=raw.trim();if(/^https?:\/\//i.test(s)){try{return {href:new URL(s).href,local:false}}catch{return null}}if(/^file:\/\//i.test(s)){try{return {href:new URL(s).href,local:true}}catch{return null}}if(/^[a-z]:[\\/]/i.test(s))return {href:'file:///'+s.replace(/\\/g,'/').split('/').map((v,i)=>i===0?v:encodeURIComponent(v)).join('/'),local:true};if(/^\\\\/.test(s))return {href:'file://'+s.slice(2).replace(/\\/g,'/').split('/').map(encodeURIComponent).join('/'),local:true};if(s.startsWith('/'))return {href:'file://'+s.split('/').map(encodeURIComponent).join('/'),local:true};return null}
+function validExamQuestions(questions){return questions===undefined||(Array.isArray(questions)&&questions.length<=500&&new Set(questions.map(q=>q?.id)).size===questions.length&&new Set(questions.map(q=>q?.number)).size===questions.length&&questions.every(q=>q&&typeof q.id==='string'&&q.id.length>0&&Number.isInteger(q.number)&&q.number>=1&&q.number<=9999&&typeof q.topic==='string'&&q.topic.length<=200&&typeof q.notes==='string'&&q.notes.length<=5000))}
+function validTopicNumbers(numbers){return Array.isArray(numbers)&&numbers.length<=200&&new Set(numbers).size===numbers.length&&numbers.every(n=>Number.isInteger(n)&&n>=1&&n<=9999)}
+function validPrepTopics(topics){return topics===undefined||(Array.isArray(topics)&&topics.length<=10000&&new Set(topics.map(t=>t?.id)).size===topics.length&&topics.every(t=>t&&typeof t.id==='string'&&t.id.length>0&&typeof t.title==='string'&&t.title.trim()&&t.title.length<=200&&validTopicNumbers(t.lectures)&&validTopicNumbers(t.tutorials)&&['unrated','low','medium','high'].includes(t.confidence)))}
+function validExamPrep(panels){return panels===undefined||(Array.isArray(panels)&&panels.length<=2000&&new Set(panels.map(p=>p?.course)).size===panels.length&&panels.every(p=>p&&validPrepTopics(p.topics)&&typeof p.course==='string'&&p.course.trim()&&p.course.length<=100&&typeof p.examDate==='string'&&(!p.examDate||validDate(p.examDate))&&Array.isArray(p.solved)&&p.solved.length<=10000&&new Set(p.solved.map(e=>e?.id)).size===p.solved.length&&p.solved.every(e=>e&&validExamQuestions(e.questions)&&typeof e.id==='string'&&typeof e.title==='string'&&e.title.trim()&&e.title.length<=200&&typeof e.solvedDate==='string'&&(!e.solvedDate||validDate(e.solvedDate))&&typeof e.notes==='string'&&e.notes.length<=5000)))}
+function validBackup(d){return d&&d.version===1&&validAssignments(d.assignments)&&(d.hiddenAssignmentCourses===undefined||(Array.isArray(d.hiddenAssignmentCourses)&&d.hiddenAssignmentCourses.every(c=>typeof c==='string'&&c.trim()&&c.length<=100)))&&(d.examCourses===undefined||(Array.isArray(d.examCourses)&&d.examCourses.length<=2000&&d.examCourses.every(c=>typeof c==='string'&&c.trim()&&c.length<=100)&&new Set(d.examCourses).size===d.examCourses.length))&&validExamPrep(d.examPrep)&&(d.noExams===undefined||(Array.isArray(d.noExams)&&d.noExams.length<=2000&&d.noExams.every(e=>e&&validDate(e.date)&&typeof e.from==='string'&&(!e.from||/^([01]\d|2[0-3]):[0-5]\d$/.test(e.from)))&&new Set(d.noExams.map(e=>e.date)).size===d.noExams.length))&&(d.courseColors===undefined||(Array.isArray(d.courseColors)&&d.courseColors.length<=50000&&d.courseColors.every(c=>c&&typeof c.course==='string'&&c.course.trim()&&c.course.length<=100&&typeof c.color==='string'&&/^#[0-9a-f]{6}$/i.test(c.color))&&new Set(d.courseColors.map(c=>c.course)).size===d.courseColors.length))&&(d.holidays===undefined||(Array.isArray(d.holidays)&&d.holidays.length<=2000&&d.holidays.every(validDate)&&new Set(d.holidays).size===d.holidays.length))&&(d.courses===undefined||(Array.isArray(d.courses)&&d.courses.length<=2000&&d.courses.every(c=>typeof c==='string'&&c.trim()&&c.length<=100)&&new Set(d.courses).size===d.courses.length))&&(!d.semester||(validDate(d.semester.start)&&validDate(d.semester.end)&&d.semester.start<=d.semester.end))&&[0,1].includes(d.weekStart)&&Array.isArray(d.blocks)&&d.blocks.length<=20000&&new Set(d.blocks.map(b=>b?.id)).size===d.blocks.length&&d.blocks.every(b=>b&&typeof b.id==='string'&&(b.recurrence===undefined||(b.recurrence&&typeof b.recurrence.id==='string'&&b.recurrence.id.length>0&&b.recurrence.id.length<=200&&validDate(b.recurrence.until)&&typeof b.recurrence.skipHolidays==='boolean'))&&(b.number===undefined||b.number===null||(Number.isInteger(b.number)&&b.number>=1&&b.number<=9999))&&['lecture','recitation','lab','all-day','exam'].includes(b.kind)&&validDate(b.date)&&typeof b.course==='string'&&(isUntimedEvent(b.kind)||b.course.trim())&&b.course.length<=100&&typeof b.title==='string'&&b.title.length<=200&&typeof b.notes==='string'&&b.notes.length<=5000&&typeof b.time==='string'&&(!b.time||/^([01]\d|2[0-3]):[0-5]\d$/.test(b.time))&&(b.endTime===undefined||(typeof b.endTime==='string'&&((!b.time&&!b.endTime)||(/^([01]\d|2[0-3]):[0-5]\d$/.test(b.endTime)&&!!b.time&&b.endTime>b.time))))&&typeof b.reviewed==='boolean'&&Array.isArray(b.resources)&&b.resources.length<=100&&b.resources.every(r=>r&&typeof r.label==='string'&&r.label.length<=200&&typeof r.url==='string'&&r.url.length<=4000&&resourceTarget(r.url)))}
+try{const saved=localStorage.getItem(KEY);if(saved){const parsed=JSON.parse(saved);if(!validBackup(parsed))throw Error('נתוני היומן שנשמרו אינם תקינים');data=parsed}}catch(e){$('storageWarning').textContent='לא ניתן לקרוא את הנתונים שנשמרו. מומלץ לייצא גיבוי לפני הסגירה. '+e.message;$('storageWarning').classList.remove('hidden')}
+function generatedColor(n){const h=(n*137.508)%360,s=.48,l=.43,a=s*Math.min(l,1-l);const f=x=>{const k=(x+h/30)%12;return Math.round(255*(l-a*Math.max(-1,Math.min(k-3,9-k,1)))).toString(16).padStart(2,'0')};return '#'+f(0)+f(8)+f(4)}
+function ensureColorEntries(entries,names){const used=new Set(entries.map(e=>e.color.toLowerCase()));for(const course of new Set(names)){if(entries.some(e=>e.course===course))continue;let i=0,color;do{color=COURSE_PALETTE[i]||generatedColor(i-COURSE_PALETTE.length);i++}while(used.has(color.toLowerCase()));entries.push({course,color});used.add(color.toLowerCase())}return entries}
+function ensureCourseColors(){if(!Array.isArray(data.courseColors))data.courseColors=[];ensureColorEntries(data.courseColors,[...data.courses,...data.blocks.map(b=>b.course).filter(Boolean),...(data.examPrep||[]).map(p=>p.course),...(data.examCourses||[])])}
+function courseColor(course){return data.courseColors.find(e=>e.course===course)?.color||COURSE_PALETTE[0]}
+function poolNames(){return [...new Set($('coursePoolNames').value.split(/\r?\n/).map(n=>n.trim().normalize('NFC')).filter(Boolean))]}
+function renderColorChoices(){const names=[...new Set([...poolNames().filter(n=>n.length<=100).slice(0,2000),...(coursePoolContext==='exam-prep'?[]:data.blocks.map(b=>b.course))])];ensureColorEntries(courseColorDraft,names);$('courseColorChoices').innerHTML=names.map(course=>`<label class="color-choice"><input type="color" data-color-course="${escapeHTML(course)}" aria-label="צבע הקורס ${escapeHTML(course)}" value="${courseColorDraft.find(e=>e.course===course).color}"><span dir="auto">${escapeHTML(course)}</span></label>`).join('')||( '<p class="hint">הוסיפו שמות קורסים כדי לבחור צבעים.</p>')}
+function normalizeRestrictions(){if(data.holidays&&JSON.stringify([...data.holidays].sort())===JSON.stringify([...LEGACY_HOLIDAYS].sort())&&data.restrictionsVersion===undefined)data.holidays=[...DEFAULT_HOLIDAYS];if(data.noExams===undefined)data.noExams=DEFAULT_NO_EXAMS.map(e=>({...e}));data.restrictionsVersion=2}
+normalizeRestrictions();
+function normalizeExamCourses(){if(!Array.isArray(data.examCourses))data.examCourses=[...new Set((data.examPrep||[]).map(p=>p.course))]}
+function normalizeCourses(){normalizeExamCourses();if(!Array.isArray(data.courses))data.courses=[...new Set(data.blocks.map(b=>b.course))]}
+normalizeCourses();
+let week=start(new Date());
+function save(){normalizeExamCourses();normalizeRestrictions();ensureCourseColors();if(data.holidays===undefined)data.holidays=[...DEFAULT_HOLIDAYS];try{localStorage.setItem(KEY,JSON.stringify(data));$('saveStatus').textContent='● נשמר במכשיר הזה';return true}catch{$('saveStatus').textContent='⚠ לא נשמר — יש לייצא גיבוי';$('storageWarning').textContent='אחסון הדפדפן אינו זמין או מלא. השינויים זמינים רק בחלון הנוכחי. יש לייצא גיבוי לפני הסגירה.';$('storageWarning').classList.remove('hidden');return false}}
+function toast(message){$('toast').textContent=message;$('toast').classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.add('hidden'),3600)}
+function dayNumber(d){return Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/86400000}
+function noExamNotice(ds){const entry=(data.noExams||DEFAULT_NO_EXAMS).find(e=>e.date===ds);return entry?(entry.from?'ללא מבחנים החל מ־'+entry.from+' · לימודים כרגיל':'ללא מבחנים בלבד · לימודים כרגיל'):''}
+function holidays(){return data.holidays||DEFAULT_HOLIDAYS}
+function semesterInfo(viewWeek) {
+  const semester = data.semester || DEFAULT_SEMESTER;
+  const firstDate = date(semester.start);
+  const first = dayNumber(firstDate), last = dayNumber(date(semester.end));
+  const firstWeekday = firstDate.getDay();
+  const excluded = [...new Set(holidays())].map(date)
+    .filter(day => day.getDay() < 5)
+    .map(dayNumber).filter(day => day >= first && day <= last);
+
+  function teachingDaysThrough(day) {
+    const length = day - first + 1;
+    if (length <= 0) return 0;
+    let count = Math.floor(length / 7) * 5;
+    for (let i = 0; i < length % 7; i++) {
+      if ((firstWeekday + i) % 7 < 5) count++;
+    }
+    return count - excluded.filter(holiday => holiday <= day).length;
+  }
+
+  const bands = [];
+  const viewStart = dayNumber(viewWeek);
+  for (let column = 1; column <= 7; column++) {
+    const day = viewStart + column - 1;
+    if (day < first || day > last) continue;
+    const index = Math.ceil(teachingDaysThrough(day) / 5);
+    if (!index) continue;
+    const previous = bands[bands.length - 1];
+    if (previous?.index === index) previous.span++;
+    else bands.push({index, column, span:1});
+  }
+  return {...semester, bands, total:Math.ceil(teachingDaysThrough(last) / 5), excludedCount:excluded.length};
+}
+function renderSemester() {
+  const info = semesterInfo(week);
+  $('semesterHint').textContent = date(info.start).toLocaleDateString('he-IL') + ' – '
+    + date(info.end).toLocaleDateString('he-IL') + ' · ' + info.total
+    + ' שבועות בסך הכול. כל שבוע כולל עד חמישה ימי לימוד, מראשון עד חמישי וללא חופשות.';
+  return info.bands.map(band => '<div class="study-week-band" style="grid-column:' + band.column
+    + ' / span ' + band.span + '">שבוע ' + band.index + ' בסמסטר</div>').join('');
+}
+function renderEventCard(b) {return `<article class="block ${b.kind} ${b.title.trim()?'':'untitled'} ${b.reviewed?'done':''}" data-materials="${escapeHTML(b.id)}" tabindex="0" aria-haspopup="dialog" aria-label="הערות וחומרי לימוד — ${escapeHTML(eventTitle(b))}, ${escapeHTML(b.course)}" style="--course-color:${courseColor(b.course)};--course-tint:${courseColor(b.course)}0c"><div class="block-head"><span class="kind">${eventKindLabel(b.kind)}${b.number?` <bdi dir="ltr">${b.number}</bdi>`:''}${b.recurrence?'<span class="repeat-mark" title="אירוע מחזורי" aria-label="אירוע מחזורי">↻</span>':''}</span><button class="edit" data-edit="${escapeHTML(b.id)}" aria-label="עריכת ${escapeHTML(eventTitle(b))}">⋯</button></div>${b.course?`<p class="course"><span class="dot" aria-hidden="true"></span><bdi>${escapeHTML(b.course)}</bdi></p>`:''}${b.title.trim()?`<h3>${escapeHTML(b.title)}</h3>`:''}${b.time?`<p class="time">◷ ${b.endTime?'':'שעת התחלה: '}<bdi dir="ltr">${escapeHTML(b.time)}${b.endTime?'–'+escapeHTML(b.endTime):''}</bdi></p>`:''}${b.notes?`<p class="notes">${escapeHTML(b.notes)}</p>`:''}${b.resources.length?`<div class="resources">${b.resources.map((r,j)=>{const t=resourceTarget(r.url);return `<div class="resource"><a href="${escapeHTML(t.href)}" target="_blank" rel="noopener noreferrer" title="${escapeHTML(r.url)}">${t.local?'▱':'↗'} ${escapeHTML(r.label||'חומר לימוד')}</a><button class="copy" data-copy="${escapeHTML(b.id)}" data-resource="${j}" aria-label="העתקת ${escapeHTML(r.label||'חומר לימוד')}" title="העתקת ${t.local?'נתיב':'קישור'}">⧉</button></div>`}).join('')}</div>`:''}${isUntimedEvent(b.kind)?'':`<label class="complete"><input type="checkbox" data-check="${escapeHTML(b.id)}" ${b.reviewed?'checked':''}>הייתי/השלמתי</label>`}</article>`}
+function renderDayLanes(ds,day,items) {
+  const untimed = items.filter(item => isUntimedEvent(item.kind));
+  const timed = items.filter(item => !isUntimedEvent(item.kind));
+  const dayLabel = day.toLocaleDateString('he-IL',{dateStyle:'full'});
+  const lane = (key,label,events) => '<div class="day-events" data-date="' + ds + key
+    + '" tabindex="0" role="region" aria-label="' + escapeHTML(label + ' — ' + dayLabel) + '">'
+    + events.map(renderEventCard).join('') + '</div>';
+  const regular = lane('', 'הרצאות, תרגולים ומעבדות', timed);
+  if (!untimed.length) return regular;
+  const allDayLane = lane('-all-day','אירועי יום שלם ומבחנים',untimed);
+  return timed.length ? '<div class="day-lanes">' + regular + allDayLane + '</div>' : allDayLane;
+}
+function render(){const scrollPositions=new Map([...document.querySelectorAll('.day-events')].map(el=>[el.dataset.date,el.scrollTop]));ensureCourseColors();const studyWeekBands=renderSemester();const end=addDays(week,6),fmt={month:'2-digit',day:'2-digit',year:'numeric'};$('weekTitle').textContent=`${week.toLocaleDateString('he-IL',fmt)} – ${end.toLocaleDateString('he-IL',fmt)}`;$('jump').value=iso(week);const courses=[...data.courses].sort((a,b)=>a.localeCompare(b,'he'));if(filter&&!courses.includes(filter)&&!data.blocks.some(b=>b.course===filter))filter='';renderCourseSidebar();$('courseSuggestions').innerHTML=[...new Set([...courses,...data.blocks.map(b=>b.course).filter(Boolean)])].sort((a,b)=>a.localeCompare(b,'he')).map(c=>`<option value="${escapeHTML(c)}"></option>`).join('');const blocks=data.blocks.filter(b=>b.date>=iso(week)&&b.date<=iso(end)&&(!filter||b.course===filter||(isUntimedEvent(b.kind)&&!b.course)));$('lectureCount').textContent=blocks.filter(b=>b.kind==='lecture').length;$('recitationCount').textContent=blocks.filter(b=>b.kind==='recitation').length;const countedBlocks=blocks.filter(b=>!isUntimedEvent(b.kind));$('completedCount').textContent=`${countedBlocks.filter(b=>b.reviewed).length} / ${countedBlocks.length}`;
+ $('calendar').innerHTML=studyWeekBands+Array.from({length:7},(_,i)=>{const day=addDays(week,i),ds=iso(day),items=blocks.filter(b=>b.date===ds).sort((a,b)=>(a.time||'99:99').localeCompare(b.time||'99:99'));return `<section class="day ${day.getDay()===5||day.getDay()===6?'weekend':''} ${holidays().includes(ds)?'holiday':''} ${ds<(data.semester||DEFAULT_SEMESTER).start||ds>(data.semester||DEFAULT_SEMESTER).end?'outside-semester':''} ${ds===iso(new Date())?'today':''}" aria-label="${day.toLocaleDateString('he-IL',{dateStyle:'full'})}"><div class="day-head"><span>${day.toLocaleDateString('he-IL',{weekday:'short'})}</span><strong>${day.getDate()}</strong></div>${day.getDay()===5||day.getDay()===6?'<p class="weekend-label">ללא הרצאות ותרגולים</p>':''}${holidays().includes(ds)?'<p class="holiday-label">ללא לימודים וללא מבחנים · לא נספר</p>':noExamNotice(ds)?`<p class="exam-only-label">${escapeHTML(noExamNotice(ds))}</p>`:''}${renderDayLanes(ds,day,items)}<button class="add-day" data-add="${ds}" aria-label="הוספת אירוע בתאריך ${day.toLocaleDateString('he-IL',{dateStyle:'full'})}">＋ הוספת אירוע</button></section>`}).join('');document.querySelectorAll('.day-events').forEach(el=>{if(scrollPositions.has(el.dataset.date))el.scrollTop=scrollPositions.get(el.dataset.date)});renderExamPrep();if(currentPage==='assignments')renderAssignments();if(currentPage==='calendar'){renderPendingAssignments();renderPendingLessons()}}
+function resourceRow(label='',url='',container='resourceRows'){const row=document.createElement('div');row.className='resource-row';row.innerHTML=`<input dir="auto" aria-label="שם חומר הלימוד" maxlength="200" placeholder="למשל: הקלטת ההרצאה" value="${escapeHTML(label)}"><input aria-label="כתובת אתר או נתיב מקומי" maxlength="4000" placeholder="https://… or C:\\Study\\…" value="${escapeHTML(url)}"><button type="button" aria-label="הסרת חומר לימוד">×</button>`;row.querySelector('button').onclick=()=>row.remove();$(container).append(row)}
+let materialEventId=null;
+function openMaterials(id){const b=data.blocks.find(b=>b.id===id);if(!b)return;materialEventId=id;$('materialsEvent').textContent=b.course+' · '+eventTitle(b);$('materialNotes').value=b.notes;$('materialsError').textContent='';$('materialRows').innerHTML='';b.resources.forEach(r=>resourceRow(r.label,r.url,'materialRows'));$('materialEditing').open=b.resources.length===0;$('materialLinks').innerHTML=b.resources.length?b.resources.map((r,i)=>{const t=resourceTarget(r.url);return `<div class="resource"><a href="${escapeHTML(t.href)}" target="_blank" rel="noopener noreferrer" title="${escapeHTML(r.url)}">${t.local?'▱':'↗'} ${escapeHTML(r.label||'חומר לימוד')}</a><button type="button" class="copy" data-material-copy="${i}" aria-label="העתקת ${escapeHTML(r.label||'חומר לימוד')}" title="העתקת קישור או נתיב">⧉</button></div>`}).join(''):'<p class="hint">עדיין לא נוספו חומרי לימוד לאירוע הזה.</p>';if(!$('materialsDialog').open)$('materialsDialog').showModal()}
+$('closeMaterials').onclick=$('cancelMaterials').onclick=()=>$('materialsDialog').close();
+$('addMaterial').onclick=()=>{if($('materialRows').children.length>=100)return toast('אפשר להוסיף עד 100 חומרי לימוד לכל אירוע.');resourceRow('','','materialRows')};
+$('materialsForm').onsubmit=e=>{e.preventDefault();const b=data.blocks.find(b=>b.id===materialEventId);if(!b)return;const resources=[];for(const row of $('materialRows').children){const inputs=row.querySelectorAll('input'),label=inputs[0].value.trim(),url=inputs[1].value.trim();if(!label&&!url)continue;if(!resourceTarget(url)){$('materialsError').textContent='לכל חומר לימוד יש להזין כתובת אתר המתחילה ב־http(s) או נתיב מקומי מלא.';return}resources.push({label:label||'חומר לימוד',url})}b.notes=$('materialNotes').value;b.resources=resources;const stored=save();render();$('materialsDialog').close();toast(stored?'ההערות וחומרי הלימוד נשמרו':'עודכן לחלון הנוכחי. יש לייצא גיבוי כדי לשמור.')};
+async function copyResource(id,index){const raw=data.blocks.find(b=>b.id===id)?.resources[index]?.url;if(!raw)return;try{await navigator.clipboard.writeText(raw);toast('הועתק ללוח')}catch{const helper=document.createElement('textarea');helper.value=raw;helper.style.position='fixed';helper.style.top='0';document.body.append(helper);helper.select();let ok=false;try{ok=document.execCommand('copy')}catch{}helper.remove();if(ok)toast('הועתק ללוח');else{openMaterials(id);$('materialEditing').open=true;toast('אפשר לסמן ולהעתיק את הנתיב בשדות עריכת הקישורים.')}}}
+$('materialLinks').onclick=e=>{const button=e.target.closest('[data-material-copy]');if(button)copyResource(materialEventId,Number(button.dataset.materialCopy))};
+function isUntimedEvent(kind) {
+  return kind === 'all-day' || kind === 'exam';
+}
+function eventKindLabel(kind) {
+  if (kind === 'exam') return 'מבחן';
+  return kind === 'all-day' ? 'יום שלם' : kind === 'lecture' ? 'הרצאה' : kind === 'lab' ? 'מעבדה' : 'תרגול';
+}
+function eventTitle(b){return b.title.trim()||(eventKindLabel(b.kind)+(b.number?' '+b.number:''))}
+function updateEventKindFields() {
+  const allDay = isUntimedEvent($('kind').value);
+  $('course').required = !allDay;
+  $('topic').required = allDay;
+  $('eventNumberField').classList.toggle('hidden', allDay);
+  $('eventTimeFields').classList.toggle('hidden', allDay);
+  $('eventCompletionField').classList.toggle('hidden', allDay);
+  updateRepeatPreview();
+}
+$('kind').onchange = updateEventKindFields;
+function eventId(){return globalThis.crypto?.randomUUID?.()||Date.now().toString(36)+Math.random().toString(36).slice(2)}
+function recurringDates(first,until,skip){if(!validDate(first)||!validDate(until)||until<first)throw Error('יש לבחור תאריך סיום שאינו מוקדם מתאריך האירוע.');if(dayNumber(date(until))-dayNumber(date(first))>721)throw Error('אפשר ליצור עד 104 שבועות בכל סדרה.');const dates=[first];for(let d=addDays(date(first),7);iso(d)<=until;d=addDays(d,7)){if(!skip||!holidays().includes(iso(d)))dates.push(iso(d))}return dates}
+function recurrenceEvents(base,until,skip,copyMaterials){const dates=recurringDates(base.date,until,skip),initial=base.number??1;if(initial+dates.length-1>9999)throw Error('מספרי האירועים בסדרה אינם יכולים לעבור את 9999.');const recurrence={id:eventId(),until,skipHolidays:skip};return dates.map((ds,i)=>({...base,id:i===0?base.id:eventId(),date:ds,number:isUntimedEvent(base.kind)?null:initial+i,recurrence:{...recurrence},reviewed:i===0?base.reviewed:false,notes:i===0||copyMaterials?base.notes:'',resources:i===0||copyMaterials?base.resources.map(r=>({...r})):[]}))}
+function updateRepeatPreview(){const active=$('repeatWeekly').checked&&!$('repeatWeekly').disabled;$('repeatOptions').classList.toggle('hidden',!active);if(!active)return;try{const dates=recurringDates($('blockDate').value,$('repeatUntil').value,$('skipRepeatHolidays').checked),n=Number($('eventNumber').value)||1;$('repeatPreview').textContent=`ייווצרו ${dates.length} אירועים${isUntimedEvent($('kind').value)?'':', עם המספרים '+n+'–'+(n+dates.length-1)}.` }catch(e){$('repeatPreview').textContent=e.message}}
+function setupRecurrence(b){const existing=!!b?.recurrence;$('repeatWeekly').checked=existing;$('repeatWeekly').disabled=existing;$('repeatUntil').value=b?.recurrence?.until||((data.semester||DEFAULT_SEMESTER).end>=$('blockDate').value?(data.semester||DEFAULT_SEMESTER).end:$('blockDate').value);$('skipRepeatHolidays').checked=true;$('copyRepeatMaterials').checked=false;$('repeatExisting').classList.toggle('hidden',!existing);if(existing)$('repeatExistingHint').textContent='אירוע בסדרה שבועית עד '+date(b.recurrence.until).toLocaleDateString('he-IL')+'.';updateRepeatPreview()}
+function openEditor(ds,id=null){editing=id;const b=data.blocks.find(b=>b.id===id);$('blockForm').reset();$('modalTitle').textContent=b?'עריכת מפגש לימוד':'הוספת אירוע לימוד';$('deleteBlock').classList.toggle('hidden',!b);$('formError').textContent='';$('course').value=b?.course||filter;$('kind').value=b?.kind||'lecture';$('topic').value=b?.title||'';$('eventNumber').value=b?.number??'';$('blockDate').value=b?.date||ds;$('blockTime').value=b?.time||'';$('blockEndTime').value=b?.endTime||'';$('notes').value=b?.notes||'';$('reviewed').checked=b?.reviewed||false;$('resourceRows').innerHTML='';if(b?.resources.length)b.resources.forEach(r=>resourceRow(r.label,r.url));else resourceRow();setupRecurrence(b);updateEventKindFields();$('editor').showModal()}
+function ask(title,message,callback){$('confirmTitle').textContent=title;$('confirmText').textContent=message;confirmCallback=callback;$('confirmDialog').showModal()}
+$('confirmNo').onclick=()=>$('confirmDialog').close();$('confirmYes').onclick=()=>{$('confirmDialog').close();confirmCallback?.()};
+$('addBlock').onclick=()=>openEditor(iso(new Date())>=iso(week)&&iso(new Date())<=iso(addDays(week,6))?iso(new Date()):iso(week));$('closeDialog').onclick=$('cancelDialog').onclick=()=>$('editor').close();$('addResource').onclick=()=>{if($('resourceRows').children.length>=100)return toast('אפשר להוסיף עד 100 חומרי לימוד לכל מפגש.');resourceRow()};
+$('blockForm').onsubmit=e=>{e.preventDefault();const course=$('course').value.trim(),title=$('topic').value.trim(),kind=$('kind').value;const allDay=isUntimedEvent(kind);if((allDay?!title:!course)||!validDate($('blockDate').value)){$('formError').textContent=allDay?'יש להזין כותרת ותאריך תקין.':'יש להזין קורס ותאריך תקין.';return}const numberText=allDay?'':$('eventNumber').value.trim(),number=numberText===''?null:Number(numberText);if(number!==null&&(!Number.isInteger(number)||number<1||number>9999)){$('formError').textContent='מספר המפגש צריך להיות מספר שלם בין 1 ל־9999.';return}const time=allDay?'':$('blockTime').value,endTime=allDay?'':$('blockEndTime').value;if((time||endTime)&&(!/^([01]\d|2[0-3]):[0-5]\d$/.test(time)||!/^([01]\d|2[0-3]):[0-5]\d$/.test(endTime)||endTime<=time)){$('formError').textContent='יש להזין שעת התחלה ושעת סיום. שעת הסיום צריכה להיות מאוחרת משעת ההתחלה.';return}const resources=[];for(const row of $('resourceRows').children){const inputs=row.querySelectorAll('input'),label=inputs[0].value.trim(),url=inputs[1].value.trim();if(!label&&!url)continue;if(!resourceTarget(url)){$('formError').textContent='לכל חומר לימוד יש להזין כתובת אתר המתחילה ב־http(s) או נתיב מקומי מלא.';return}resources.push({label:label||'חומר לימוד',url})}const b={id:editing||eventId(),course,title,number,kind,date:$('blockDate').value,time,endTime,notes:$('notes').value,reviewed:!allDay&&$('reviewed').checked,resources};const original=data.blocks.find(x=>x.id===editing);let events=[b];if(original?.recurrence)b.recurrence={...original.recurrence};else if($('repeatWeekly').checked){try{events=recurrenceEvents(b,$('repeatUntil').value,$('skipRepeatHolidays').checked,$('copyRepeatMaterials').checked)}catch(err){$('formError').textContent=err.message;return}}if(data.blocks.length-(editing?1:0)+events.length>20000){$('formError').textContent='היומן יכול להכיל עד 20,000 אירועים. יש לקצר את טווח החזרות.';return}if(editing)data.blocks=data.blocks.filter(x=>x.id!==editing);data.blocks.push(...events);week=start(date(b.date));filter='';const stored=save();render();$('editor').close();toast(stored?(events.length>1?`נשמרו ${events.length} אירועים מחזוריים`:'האירוע נשמר'):'האירוע נוסף לחלון הנוכחי. יש לייצא גיבוי כדי לשמור אותו.')};
+$('repeatWeekly').onchange=updateRepeatPreview;$('repeatUntil').onchange=updateRepeatPreview;$('skipRepeatHolidays').onchange=updateRepeatPreview;$('blockDate').onchange=updateRepeatPreview;$('eventNumber').oninput=updateRepeatPreview;
+$('stopRepeats').onclick=()=>{const current=data.blocks.find(b=>b.id===editing);if(!current?.recurrence)return;const upcoming=data.blocks.filter(b=>b.recurrence?.id===current.recurrence.id&&b.id!==current.id&&b.date>current.date);ask('לבטל את החזרות הבאות?',`יימחקו ${upcoming.length} אירועים עתידיים בסדרה. האירוע הזה ואירועים קודמים יישמרו.`,()=>{const ids=new Set(upcoming.map(b=>b.id));data.blocks=data.blocks.filter(b=>!ids.has(b.id));delete current.recurrence;const stored=save();render();$('editor').close();toast(stored?'החזרות הבאות בוטלו':'עודכן לחלון הנוכחי. יש לייצא גיבוי כדי לשמור.')})};
+$('deleteBlock').onclick=()=>ask('למחוק את המפגש?','המפגש והקישורים שבו יימחקו מהיומן. הקבצים במחשב לא יימחקו.',()=>{data.blocks=data.blocks.filter(b=>b.id!==editing);save();render();$('editor').close();toast('המפגש נמחק')});
+$('previous').onclick=()=>{week=addDays(week,-7);render()};$('next').onclick=()=>{week=addDays(week,7);render()};$('jump').onchange=()=>{if(validDate($('jump').value)){week=start(date($('jump').value));render()}};
+$('courses').onclick=e=>{const b=e.target.closest('[data-course]');if(b){if(currentPage==='assignments'){[...document.querySelectorAll('.assignment-column')].find(column=>column.dataset.assignmentCourse===b.dataset.course)?.scrollIntoView({block:'nearest',inline:'nearest'});return}if(currentPage==='exam-prep'){if(b.dataset.course)prepCourse=b.dataset.course;renderExamPrep()}else{filter=b.dataset.course;render()}}};
+$('calendar').onclick=async e=>{const edit=e.target.closest('[data-edit]'),add=e.target.closest('[data-add]'),copy=e.target.closest('[data-copy]');if(edit){openEditor('',edit.dataset.edit);return}if(add){openEditor(add.dataset.add);return}if(copy){await copyResource(copy.dataset.copy,Number(copy.dataset.resource));return}if(e.target.closest('a,button,input,label,select,textarea'))return;const card=e.target.closest('[data-materials]');if(card)openMaterials(card.dataset.materials)};
+$('calendar').onkeydown=e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-materials]')){e.preventDefault();openMaterials(e.target.dataset.materials)}};
+$('calendar').onchange=e=>{if(e.target.matches('[data-check]')){const b=data.blocks.find(b=>b.id===e.target.dataset.check);b.reviewed=e.target.checked;save();render()}};
+function exportBackup(){normalizeExamCourses();normalizeRestrictions();ensureCourseColors();if(data.holidays===undefined)data.holidays=[...DEFAULT_HOLIDAYS];const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=`weeknote-backup-${iso(new Date())}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('הגיבוי יוצא')}
+document.querySelectorAll('[data-action]').forEach(b=>b.onclick=()=>b.dataset.action==='export'?exportBackup():$('importFile').click());
+$('importFile').onchange=async()=>{const f=$('importFile').files[0];$('importFile').value='';if(!f)return;try{if(f.size>15*1024*1024)throw Error('הגיבוי גדול מדי (עד 15 מגה־בייט).');const parsed=JSON.parse(await f.text());if(!validBackup(parsed))throw Error('יש לבחור קובץ גיבוי JSON תקין של Weeknote.');ask('לשחזר את הגיבוי?',`להחליף את היומן הנוכחי ב־${parsed.blocks.length} מפגשים מהגיבוי? כדי לשמור את היומן הקיים, יש לייצא אותו לפני השחזור.`,()=>{data=parsed;normalizeRestrictions();normalizeCourses();filter='';week=start(new Date());const stored=save();render();toast(stored?'הגיבוי שוחזר':'הגיבוי שוחזר לחלון הנוכחי. אחסון הדפדפן אינו זמין.')})}catch(e){toast(e.message)}};
+$('manageCourses').onclick=()=>{coursePoolContext=currentPage;normalizeExamCourses();const prep=coursePoolContext==='exam-prep';$('coursePoolTitle').textContent=prep?'קורסים להכנה למבחנים':'הקורסים שלי בסמסטר';$('coursePoolIntro').textContent=prep?'רשימה עצמאית להכנה למבחנים. אפשר להוסיף כאן קורסים גם אם אינם ביומן הסמסטר.':'רשימת קורסי הסמסטר נפרדת מרשימת הקורסים להכנה למבחנים.';$('coursePoolHelp').textContent=prep?'הסרת קורס מהרשימה מסתירה אותו. ההכנה שנשמרה לא נמחקת, ותופיע שוב אם תוסיפי את אותו שם.':'שינוי הרשימה אינו משנה אירועים קיימים או את רשימת קורסי המבחנים.';$('coursePoolNames').value=(prep?data.examCourses:data.courses).join('\n');$('coursePoolError').textContent='';ensureCourseColors();courseColorDraft=data.courseColors.map(e=>({...e}));renderColorChoices();$('coursePoolDialog').showModal()};
+$('coursePoolNames').oninput=renderColorChoices;
+$('courseColorChoices').oninput=e=>{const input=e.target;if(input.type!=='color'||!/^#[0-9a-f]{6}$/i.test(input.value))return;const entry=courseColorDraft.find(c=>c.course===input.dataset.colorCourse);if(entry)entry.color=input.value};
+$('closeCoursePool').onclick=$('cancelCoursePool').onclick=()=>$('coursePoolDialog').close();
+$('coursePoolForm').onsubmit=e=>{e.preventDefault();const names=[...new Set($('coursePoolNames').value.split(/\r?\n/).map(n=>n.trim().normalize('NFC')).filter(Boolean))];if(names.length>2000||names.some(n=>n.length>100)){$('coursePoolError').textContent='אפשר לשמור עד 2,000 קורסים, ועד 100 תווים לכל שם קורס.';return}if(coursePoolContext==='exam-prep'){data.examCourses=names;if(!names.includes(prepCourse))prepCourse=names[0]||''}else{data.courses=names;if(filter&&!names.includes(filter))filter=''}if(courseColorDraft.length)data.courseColors=courseColorDraft.map(e=>({...e}));const stored=save();render();$('coursePoolDialog').close();toast(stored?'רשימת הקורסים נשמרה':'הרשימה עודכנה לחלון הנוכחי. יש לייצא גיבוי כדי לשמור אותה.')};
+$('manageHolidays').onclick=()=>{$('holidayDates').value=[...holidays()].sort().join('\n');$('noExamDates').value=(data.noExams||DEFAULT_NO_EXAMS).map(e=>e.date+(e.from?' | '+e.from:'')).join('\n');$('holidaysError').textContent='';$('holidaysDialog').showModal()};
+$('closeHolidays').onclick=$('cancelHolidays').onclick=()=>$('holidaysDialog').close();
+$('holidaysForm').onsubmit=e=>{e.preventDefault();const dates=[...new Set($('holidayDates').value.split(/\r?\n/).map(s=>s.trim()).filter(Boolean))].sort();if(dates.length>2000||!dates.every(validDate)){$('holidaysError').textContent='יש להזין עד 2,000 תאריכים תקינים בפורמט YYYY-MM-DD, תאריך אחד בכל שורה.';return}const examLines=$('noExamDates').value.split(/\r?\n/).map(s=>s.trim()).filter(Boolean),examDays=[];for(const line of examLines){const parts=line.split('|').map(s=>s.trim());if(parts.length>2||!validDate(parts[0])||(parts[1]&&!/^([01]\d|2[0-3]):[0-5]\d$/.test(parts[1]))){$('holidaysError').textContent='ברשימת המבחנים יש להזין תאריך תקין, ואפשר להוסיף | ושעה בפורמט HH:MM.';return}if(examDays.some(e=>e.date===parts[0])){$('holidaysError').textContent='יש להזין כל תאריך ברשימת המבחנים פעם אחת בלבד.';return}examDays.push({date:parts[0],from:parts[1]||''})}if(examDays.length>2000){$('holidaysError').textContent='אפשר לשמור עד 2,000 הגבלות מבחנים.';return}data.holidays=dates;data.noExams=examDays;data.restrictionsVersion=2;const stored=save();render();$('holidaysDialog').close();toast(stored?'החופשות והגבלות המבחנים נשמרו':'עודכן לחלון הנוכחי. יש לייצא גיבוי כדי לשמור.')};
+function updateSemester() {
+  const first = $('semesterStart').value, last = $('semesterEnd').value;
+  if (!validDate(first) || !validDate(last) || last < first) {
+    $('semesterError').textContent = 'יש להזין תאריכים תקינים. תאריך הסיום לא יכול להיות לפני תאריך ההתחלה.';
+    return false;
+  }
+  data.semester = {start:first,end:last};
+  save();
+  render();
+  return true;
+}
+$('editSemester').onclick = () => {
+  const semester = data.semester || DEFAULT_SEMESTER;
+  $('semesterStart').value = semester.start;
+  $('semesterEnd').value = semester.end;
+  $('semesterError').textContent = '';
+  $('semesterDialog').showModal();
+};
+$('closeSemester').onclick = $('cancelSemester').onclick = () => $('semesterDialog').close();
+$('semesterForm').onsubmit = event => {
+  event.preventDefault();
+  if (updateSemester()) $('semesterDialog').close();
+};
+function prepCourses(){normalizeExamCourses();return [...data.examCourses].sort((a,b)=>a.localeCompare(b,'he'))}
+function renderCourseSidebar(){const prep=currentPage==='exam-prep',courses=prep?prepCourses():[...data.courses].sort((a,b)=>a.localeCompare(b,'he')),selected=prep?prepCourse:filter;$('sideCoursesTitle').textContent=prep?'קורסי מבחנים':'קורסי הסמסטר';$('manageCourses').textContent=prep?'ניהול קורסי מבחנים':'ניהול קורסים';$('courses').innerHTML=(prep?courses:['',...courses]).map(c=>`<button class="${selected===c?'selected':''}" data-course="${escapeHTML(c)}"><span class="dot" style="background:${c?courseColor(c):'var(--accent)'}"></span>${escapeHTML(c||'כל הקורסים')}</button>`).join('')+(courses.length?'':`<p class="pool-empty">${prep?'עדיין אין קורסי מבחנים. לחצי על ״ניהול קורסי מבחנים״ כדי להוסיף.':'עדיין אין קורסים ברשימה. לחצו על ״ניהול קורסים״ כדי להתחיל.'}</p>`)}
+function prepPanel(course,create=false){const existing=(data.examPrep||[]).find(p=>p.course===course);if(existing)return existing;const panel={course,examDate:'',solved:[],topics:[]};if(create){if(!data.examPrep)data.examPrep=[];data.examPrep.push(panel)}return panel}
+function countdownFor(examDate,today=new Date()){return examDate?dayNumber(date(examDate))-dayNumber(today):null}
+function renderExamPrep(){closeEntryMenu();const courses=prepCourses();if(!courses.includes(prepCourse))prepCourse=courses[0]||'';renderCourseSidebar();$('prepCourseSelect').innerHTML=courses.length?courses.map(c=>`<option value="${escapeHTML(c)}">${escapeHTML(c)}</option>`).join(''):'<option value="">אין קורסים</option>';$('prepCourseSelect').value=prepCourse;$('prepCourseSelect').disabled=!prepCourse;$('prepEmpty').classList.toggle('hidden',!!prepCourse);$('addSolvedExam').disabled=!prepCourse;$('prepExamDate').disabled=!prepCourse;const panel=prepPanel(prepCourse),remaining=countdownFor(panel.examDate);$('solvedExamCount').textContent=String(panel.solved.length);$('prepExamDate').value=panel.examDate;$('examCountdown').textContent=remaining===null?'—':String(Math.abs(remaining));$('examCountdownLabel').textContent=remaining===null?'יש להזין תאריך מבחן':remaining===0?'המבחן היום':remaining<0?'ימים מאז המבחן':'ימים עד המבחן';$('prepCourseName').textContent=prepCourse||'בחרי קורס כדי להתחיל';$('solvedExamList').innerHTML=panel.solved.length?[...panel.solved].sort((a,b)=>(b.solvedDate||'').localeCompare(a.solvedDate||'')).map(e=>`<article class="solved-entry" data-exam-details="${escapeHTML(e.id)}" tabindex="0" aria-haspopup="dialog" aria-label="פירוט שאלות — ${escapeHTML(e.title)}" title="לחיצה כפולה לפתיחת פירוט השאלות" style="--entry-color:${courseColor(prepCourse)}"><div class="solved-entry-head"><div><h3 dir="auto">${escapeHTML(e.title)}</h3>${e.solvedDate?`<time datetime="${e.solvedDate}">נפתר ב־${date(e.solvedDate).toLocaleDateString('he-IL')}</time>`:''}</div><div class="solved-entry-actions"><button type="button" data-open-exam-details="${escapeHTML(e.id)}" aria-label="שאלות במבחן ${escapeHTML(e.title)}">שאלות</button><button type="button" class="entry-menu-toggle" data-entry-menu="solved" data-entry-id="${escapeHTML(e.id)}" aria-label="אפשרויות עבור ${escapeHTML(e.title)}" aria-haspopup="menu" aria-expanded="false" title="אפשרויות">⋮</button></div></div>${e.notes?`<p>${escapeHTML(e.notes)}</p>`:''}</article>`).join(''):'<div class="prep-list-empty"><strong>כל מבחן הוא עוד צעד קדימה</strong>הוסיפי כאן מבחנים שפתרת. כל רשומה נספרת כמבחן אחד שהושלם.</div>';renderPrepTopics()}
+const pageIds = {
+  calendar: ['calendarPage', 'calendarNav'],
+  'exam-prep': ['examPrepPage', 'examPrepNav'],
+  assignments: ['assignmentsPage', 'assignmentsNav']
+};
+function setPage(page, writeHash=true) {
+  currentPage = Object.hasOwn(pageIds, page) ? page : 'calendar';
+  closeEntryMenu();
+  for (const [key, [pageId, navId]] of Object.entries(pageIds)) {
+    const selected = key === currentPage;
+    $(pageId).classList.toggle('hidden', !selected);
+    $(navId).classList.toggle('nav-active', selected);
+    $(navId).ariaCurrent = selected ? 'page' : null;
+  }
+  if (currentPage === 'exam-prep') renderExamPrep();
+  else renderCourseSidebar();
+  if (currentPage === 'assignments') renderAssignments();
+  if (currentPage === 'calendar') {
+    renderPendingAssignments();
+    renderPendingLessons();
+  }
+  if (writeHash && globalThis.location) globalThis.location.hash = currentPage;
+}
+for (const [page, [, navId]] of Object.entries(pageIds)) {
+  $(navId).onclick = () => setPage(page);
+}
+function readPageHash() { setPage(globalThis.location?.hash.slice(1), false); }
+globalThis.addEventListener?.('hashchange', readPageHash);
+$('prepCourseSelect').onchange=()=>{prepCourse=$('prepCourseSelect').value;renderExamPrep()};
+$('prepExamDate').onchange=()=>{if(!prepCourse)return;const ds=$('prepExamDate').value;if(ds&&!validDate(ds)){toast('יש להזין תאריך מבחן תקין.');renderExamPrep();return}prepPanel(prepCourse,true).examDate=ds;save();renderExamPrep()};
+function openSolvedExam(id=null,course=prepCourse){if(!course)return;solvedDialogCourse=course;editingSolved=id;const entry=prepPanel(course).solved.find(e=>e.id===id);$('solvedExamTitle').textContent=entry?'עריכת מבחן שפתרתי':'הוספת מבחן שפתרתי';$('solvedExamCourse').textContent=course;$('solvedExamName').value=entry?.title||'';$('solvedExamDate').value=entry?entry.solvedDate:iso(new Date());$('solvedExamNotes').value=entry?.notes||'';$('solvedExamError').textContent='';$('solvedExamDialog').showModal()}
+$('addSolvedExam').onclick=()=>openSolvedExam();$('closeSolvedExam').onclick=$('cancelSolvedExam').onclick=()=>$('solvedExamDialog').close();
+$('solvedExamForm').onsubmit=e=>{e.preventDefault();const title=$('solvedExamName').value.trim(),solvedDate=$('solvedExamDate').value,notes=$('solvedExamNotes').value;if(!title||title.length>200||(solvedDate&&!validDate(solvedDate))||notes.length>5000){$('solvedExamError').textContent='יש להזין שם מבחן ותאריך פתרון תקין (אם נבחר).';return}if(!solvedDialogCourse)return;const panel=prepPanel(solvedDialogCourse,true);if(!editingSolved&&panel.solved.length>=10000){$('solvedExamError').textContent='אפשר לשמור עד 10,000 מבחנים לכל קורס.';return}const original=panel.solved.find(x=>x.id===editingSolved);const entry={...original,id:editingSolved||eventId(),title,solvedDate,notes};if(editingSolved)panel.solved=panel.solved.map(x=>x.id===editingSolved?entry:x);else panel.solved.push(entry);const stored=save();renderExamPrep();$('solvedExamDialog').close();toast(stored?'המבחן נשמר':'עודכן לחלון הנוכחי. יש לייצא גיבוי כדי לשמור.')};
+$('solvedExamList').onclick=e=>{const menu=e.target.closest('[data-entry-menu]');if(menu){openEntryMenu(menu);return}const details=e.target.closest('[data-open-exam-details]');if(details){openExamDetails(prepCourse,details.dataset.openExamDetails);return}const edit=e.target.closest('[data-solved-edit]'),remove=e.target.closest('[data-solved-delete]');if(edit){openSolvedExam(edit.dataset.solvedEdit);return}if(remove){const course=prepCourse,id=remove.dataset.solvedDelete,entry=prepPanel(course).solved.find(x=>x.id===id);if(!entry)return;ask('למחוק את המבחן מהרשימה?',`״${entry.title}״ יוסר מרשימת המבחנים שפתרת בקורס ${course}.`,()=>{const panel=prepPanel(course,true);panel.solved=panel.solved.filter(x=>x.id!==id);const stored=save();renderExamPrep();toast(stored?'המבחן הוסר מהרשימה':'עודכן לחלון הנוכחי. יש לייצא גיבוי כדי לשמור.')})}};
+const CONFIDENCE_LEVELS=['unrated','low','medium','high'];
+const CONFIDENCE_COLORS={unrated:'#b1b8c1',low:'#c96a61',medium:'#d2a344',high:'#589271'};
+const CONFIDENCE_LABELS={unrated:'טרם הוערך',low:'נמוך',medium:'בינוני',high:'גבוה'};
+let editingPrepTopic=null,topicDialogCourse='';
+function renderPrepTopics(){closeEntryMenu();const topics=prepPanel(prepCourse).topics||[];$('addPrepTopic').disabled=!prepCourse;$('topicPanelCount').textContent=topics.length?`${topics.length} נושאים · לחצי על ריבוע הצבע לשינוי הביטחון`:'רשימת נושאים ורמת הביטחון שלך';$('prepTopicList').innerHTML=topics.length?topics.map(t=>`<article class="prep-topic"><div class="prep-topic-head"><button type="button" class="confidence-button" data-topic-confidence="${escapeHTML(t.id)}" title="ביטחון ${CONFIDENCE_LABELS[t.confidence]} — לחיצה לשינוי" aria-label="רמת ביטחון בנושא ${escapeHTML(t.title)}: ${CONFIDENCE_LABELS[t.confidence]}. לחיצה לשינוי"><span class="confidence-swatch" style="--confidence-color:${CONFIDENCE_COLORS[t.confidence]}"></span></button><h3 dir="auto">${escapeHTML(t.title)}</h3><div class="topic-meta">${t.lectures.length?`<span>הרצאות: <bdi dir="ltr">${t.lectures.join(', ')}</bdi></span>`:''}${t.tutorials.length?`<span>תרגולים: <bdi dir="ltr">${t.tutorials.join(', ')}</bdi></span>`:''}</div><div class="prep-topic-actions"><button type="button" class="entry-menu-toggle" data-entry-menu="topic" data-entry-id="${escapeHTML(t.id)}" aria-label="אפשרויות עבור ${escapeHTML(t.title)}" aria-haspopup="menu" aria-expanded="false" title="אפשרויות">⋮</button></div></div></article>`).join(''):'<div class="prep-list-empty"><strong>מפת הנושאים שלך</strong>הוסיפי נושאים ידנית, צייני הרצאות ותרגולים, וסמני כמה את בטוחה בכל נושא.</div>'}
+function parseTopicNumbers(value){if(!value.trim())return [];const parts=value.trim().split(/[,;،\s]+/).filter(Boolean);if(parts.some(s=>!/^\d{1,4}$/.test(s)))throw Error('יש להזין מספרי הרצאות ותרגולים בין 1 ל־9999, מופרדים בפסיק.');const numbers=[...new Set(parts.map(Number))];if(!validTopicNumbers(numbers))throw Error('אפשר להזין עד 200 מספרים לכל סוג, בין 1 ל־9999.');return numbers}
+function openPrepTopic(id=null,course=prepCourse){if(!course)return;topicDialogCourse=course;editingPrepTopic=id;const topic=(prepPanel(course).topics||[]).find(t=>t.id===id);$('prepTopicTitle').textContent=topic?'עריכת נושא':'הוספת נושא';$('prepTopicCourse').textContent=course;$('prepTopicName').value=topic?.title||'';$('prepTopicLectures').value=(topic?.lectures||[]).join(', ');$('prepTopicTutorials').value=(topic?.tutorials||[]).join(', ');$('prepTopicConfidence').value=topic?.confidence||'unrated';$('prepTopicError').textContent='';$('prepTopicDialog').showModal()}
+$('addPrepTopic').onclick=()=>openPrepTopic();$('closePrepTopic').onclick=$('cancelPrepTopic').onclick=()=>$('prepTopicDialog').close();
+$('prepTopicForm').onsubmit=e=>{e.preventDefault();const title=$('prepTopicName').value.trim();if(!title||title.length>200){$('prepTopicError').textContent='יש להזין שם נושא באורך של עד 200 תווים.';return}let lectures,tutorials;try{lectures=parseTopicNumbers($('prepTopicLectures').value);tutorials=parseTopicNumbers($('prepTopicTutorials').value)}catch(err){$('prepTopicError').textContent=err.message;return}const confidence=$('prepTopicConfidence').value;if(!CONFIDENCE_LEVELS.includes(confidence)||!topicDialogCourse)return;const panel=prepPanel(topicDialogCourse,true);if(!panel.topics)panel.topics=[];if(!editingPrepTopic&&panel.topics.length>=10000){$('prepTopicError').textContent='אפשר לשמור עד 10,000 נושאים לכל קורס.';return}const topic={id:editingPrepTopic||eventId(),title,lectures,tutorials,confidence};if(editingPrepTopic)panel.topics=panel.topics.map(t=>t.id===editingPrepTopic?topic:t);else panel.topics.push(topic);const stored=save();renderPrepTopics();$('prepTopicDialog').close();toast(stored?'הנושא נשמר':'עודכן לחלון הנוכחי. יש לייצא גיבוי כדי לשמור.')};
+$('prepTopicList').onclick=e=>{const menu=e.target.closest('[data-entry-menu]');if(menu){openEntryMenu(menu);return}const edit=e.target.closest('[data-topic-edit]'),remove=e.target.closest('[data-topic-delete]'),confidence=e.target.closest('[data-topic-confidence]');if(edit){openPrepTopic(edit.dataset.topicEdit);return}if(confidence){const topic=(prepPanel(prepCourse).topics||[]).find(t=>t.id===confidence.dataset.topicConfidence);if(!topic)return;topic.confidence=CONFIDENCE_LEVELS[(CONFIDENCE_LEVELS.indexOf(topic.confidence)+1)%CONFIDENCE_LEVELS.length];const stored=save();renderPrepTopics();toast(stored?'רמת הביטחון עודכנה: '+CONFIDENCE_LABELS[topic.confidence]:'עודכן לחלון הנוכחי. יש לייצא גיבוי כדי לשמור.');return}if(remove){const course=prepCourse,id=remove.dataset.topicDelete,topic=(prepPanel(course).topics||[]).find(t=>t.id===id);if(!topic)return;ask('למחוק את הנושא?',`״${topic.title}״ יוסר מרשימת הנושאים בקורס ${course}.`,()=>{const panel=prepPanel(course,true);panel.topics=(panel.topics||[]).filter(t=>t.id!==id);const stored=save();renderPrepTopics();toast(stored?'הנושא נמחק':'עודכן לחלון הנוכחי. יש לייצא גיבוי כדי לשמור.')})}};
+let examDetailsCourse='',examDetailsId=null;
+function questionRow(question){const row=document.createElement('div');row.className='exam-question';row.dataset.questionId=question.id||eventId();row.innerHTML=`<div class="exam-question-head"><label class="field">מספר שאלה<input type="number" data-question-number min="1" max="9999" step="1" required dir="ltr" value="${question.number}"></label><label class="field">נושא / תחום<input data-question-topic dir="auto" maxlength="200" placeholder="למשל: אינטגרלים, מטריצות, עצים…" value="${escapeHTML(question.topic||'')}"></label><button type="button" data-remove-question aria-label="הסרת שאלה" title="הסרת שאלה">×</button></div><label class="field">הערות חשובות<textarea data-question-notes dir="auto" maxlength="5000" rows="4" placeholder="דרך הפתרון, טעויות שכדאי לזכור, נקודות לחזרה…">${escapeHTML(question.notes||'')}</textarea></label>`;row.querySelector('[data-remove-question]').onclick=()=>row.remove();$('examQuestionRows').append(row)}
+function openExamDetails(course,id){const entry=prepPanel(course).solved.find(e=>e.id===id);if(!entry)return;examDetailsCourse=course;examDetailsId=id;$('examDetailsTitle').textContent=entry.title;$('examDetailsCourse').textContent=course+' · פירוט שאלות במבחן';$('examDetailsError').textContent='';$('examQuestionRows').innerHTML='';if(entry.questions?.length)entry.questions.forEach(q=>questionRow(q));else questionRow({number:1,topic:'',notes:''});if(!$('examDetailsDialog').open)$('examDetailsDialog').showModal()}
+$('closeExamDetails').onclick=$('cancelExamDetails').onclick=()=>$('examDetailsDialog').close();
+$('addExamQuestion').onclick=()=>{const rows=[...$('examQuestionRows').children];if(rows.length>=500)return toast('אפשר לשמור עד 500 שאלות לכל מבחן.');const next=Math.max(0,...rows.map(r=>Number(r.querySelector('[data-question-number]').value)||0))+1;if(next>9999)return toast('מספר השאלה המרבי הוא 9999.');questionRow({number:next,topic:'',notes:''})};
+$('examDetailsForm').onsubmit=e=>{e.preventDefault();const entry=prepPanel(examDetailsCourse).solved.find(x=>x.id===examDetailsId);if(!entry){$('examDetailsError').textContent='המבחן אינו קיים עוד ברשימה.';return}const questions=[...$('examQuestionRows').children].map(row=>({id:row.dataset.questionId||eventId(),number:Number(row.querySelector('[data-question-number]').value),topic:row.querySelector('[data-question-topic]').value.trim(),notes:row.querySelector('[data-question-notes]').value}));if(!validExamQuestions(questions)){$('examDetailsError').textContent='יש להזין מספר שאלה שלם בין 1 ל־9999, בלי מספרים כפולים. הנושא מוגבל ל־200 תווים וההערות ל־5,000 תווים.';return}entry.questions=questions;const stored=save();renderExamPrep();$('examDetailsDialog').close();toast(stored?'פירוט השאלות נשמר':'עודכן לחלון הנוכחי. יש לייצא גיבוי כדי לשמור.')};
+$('solvedExamList').ondblclick=e=>{if(e.target.closest('button,a,input,label,textarea,select'))return;const card=e.target.closest('[data-exam-details]');if(card)openExamDetails(prepCourse,card.dataset.examDetails)};
+$('solvedExamList').onkeydown=e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-exam-details]')){e.preventDefault();openExamDetails(prepCourse,e.target.dataset.examDetails)}};
+let activeEntryMenu=null;
+function closeEntryMenu(restoreFocus=false){const active=activeEntryMenu;activeEntryMenu=null;$('entryMenu').classList.add('hidden');if(active?.anchor){active.anchor.ariaExpanded='false';if(restoreFocus&&active.anchor.isConnected)active.anchor.focus()}}
+function openEntryMenu(anchor){if(activeEntryMenu?.anchor===anchor){closeEntryMenu(true);return}closeEntryMenu();activeEntryMenu={kind:anchor.dataset.entryMenu,id:anchor.dataset.entryId,course:prepCourse,anchor};anchor.ariaExpanded='true';const menu=$('entryMenu');menu.innerHTML='<button type="button" role="menuitem" data-entry-action="edit">עריכה</button><button type="button" role="menuitem" data-entry-action="delete" class="delete-action">מחיקה</button>';menu.classList.remove('hidden');const rect=anchor.getBoundingClientRect(),bounds=menu.getBoundingClientRect(),viewportWidth=globalThis.innerWidth,viewportHeight=globalThis.innerHeight;menu.style.left=Math.max(8,Math.min(rect.right-bounds.width,viewportWidth-bounds.width-8))+'px';menu.style.top=Math.max(8,rect.bottom+6+bounds.height<=viewportHeight-8?rect.bottom+6:rect.top-bounds.height-6)+'px';menu.querySelector('button').focus()}
+function performEntryMenuAction(action,active){const {kind,id,course}=active;if(action==='edit'){if(kind==='solved')openSolvedExam(id,course);else openPrepTopic(id,course);return}if(action!=='delete')return;const field=kind==='solved'?'solved':'topics',entry=(prepPanel(course)[field]||[]).find(x=>x.id===id);if(!entry)return;ask(kind==='solved'?'למחוק את המבחן מהרשימה?':'למחוק את הנושא?',`״${entry.title}״ יוסר מהרשימה בקורס ${course}.`,()=>{const panel=prepPanel(course,true);panel[field]=(panel[field]||[]).filter(x=>x.id!==id);const stored=save();renderExamPrep();toast(stored?'הרשומה נמחקה':'עודכן לחלון הנוכחי. יש לייצא גיבוי כדי לשמור.')})}
+$('entryMenu').onclick=e=>{const button=e.target.closest('[data-entry-action]');if(!button||!activeEntryMenu)return;const active=activeEntryMenu;closeEntryMenu();performEntryMenuAction(button.dataset.entryAction,active)};
+$('entryMenu').onkeydown=e=>{if(e.key==='Escape'){e.preventDefault();closeEntryMenu(true);return}if(['ArrowDown','ArrowUp','Home','End'].includes(e.key)){e.preventDefault();const buttons=[...$('entryMenu').querySelectorAll('button')],current=buttons.indexOf(document.activeElement),next=e.key==='Home'?0:e.key==='End'?buttons.length-1:(current+(e.key==='ArrowUp'?-1:1)+buttons.length)%buttons.length;buttons[next]?.focus()}};
+document.addEventListener?.('click',e=>{if(activeEntryMenu&&!$('entryMenu').contains(e.target)&&!activeEntryMenu.anchor.contains(e.target))closeEntryMenu()});
+globalThis.addEventListener?.('resize',()=>closeEntryMenu());document.addEventListener?.('scroll',()=>closeEntryMenu(),true);
+
+function validAssignments(items) {
+  return items === undefined || (Array.isArray(items) && items.length <= 20000
+    && new Set(items.map(item => item?.id)).size === items.length
+    && items.every(item => item && typeof item.id === 'string'
+      && typeof item.course === 'string' && item.course.trim() && item.course.length <= 100
+      && typeof item.title === 'string' && item.title.trim() && item.title.length <= 200
+      && validDate(item.due) && typeof item.done === 'boolean'));
+}
+let assignmentEdit = null;
+let assignmentStatus = 'all';
+$('assignmentStatus').onchange = event => {
+  assignmentStatus = event.target.value;
+  renderAssignments();
+};
+
+function renderPendingLessons() {
+  const today = iso(new Date());
+  const pending = data.blocks.filter(block => !block.reviewed && block.date < today
+    && (block.kind === 'lecture' || block.kind === 'recitation'))
+    .sort((a,b) => a.date.localeCompare(b.date) || (a.time || '99:99').localeCompare(b.time || '99:99'));
+  $('pendingLessonCount').textContent = String(pending.length);
+  $('pendingLessonsList').innerHTML = pending.map(block =>
+    '<article class="assignment-item" style="--course-color:' + courseColor(block.course)
+      + '"><div class="assignment-copy"><strong dir="auto">' + escapeHTML(eventTitle(block))
+      + '</strong><small dir="auto"><span class="pending-lesson-course">' + escapeHTML(block.course) + '</span> · ' + eventKindLabel(block.kind)
+      + '</small><time datetime="' + block.date + '">' + date(block.date).toLocaleDateString('he-IL')
+      + '</time></div></article>'
+  ).join('') || '<p class="prep-list-empty">אין הרצאות או תרגולים להשלמה.</p>';
+}
+$('openPendingLessons').onclick = () => {
+  renderPendingLessons();
+  $('pendingLessonsDrawer').showModal();
+};
+$('closePendingLessons').onclick = () => $('pendingLessonsDrawer').close();
+
+function renderPendingAssignments() {
+  const pending = (data.assignments || []).filter(item => !item.done)
+    .sort((a,b) => a.due.localeCompare(b.due));
+  $('pendingAssignmentCount').textContent = String(pending.length);
+  $('pendingAssignmentsList').innerHTML = pending.map(item =>
+    '<article class="assignment-item" style="--course-color:' + courseColor(item.course)
+      + '"><div class="assignment-copy"><strong dir="auto">' + escapeHTML(item.title)
+      + '</strong><small dir="auto">' + escapeHTML(item.course) + '</small><time datetime="' + item.due
+      + '">להגשה ב־' + date(item.due).toLocaleDateString('he-IL') + '</time></div>'
+      + '<span class="assignment-countdown" data-assignment-countdown="' + item.due + '"></span></article>'
+  ).join('') || '<p class="prep-list-empty">אין מטלות פתוחות.</p>';
+  updateAssignmentCountdowns();
+}
+$('openPendingAssignments').onclick = () => {
+  renderPendingAssignments();
+  $('pendingAssignmentsDrawer').showModal();
+};
+$('closePendingAssignments').onclick = () => $('pendingAssignmentsDrawer').close();
+$('goToAssignments').onclick = () => {
+  $('pendingAssignmentsDrawer').close();
+  assignmentStatus = 'pending';
+  $('assignmentStatus').value = 'pending';
+  setPage('assignments');
+};
+function updateAssignmentCountdowns() {
+  const today = new Date();
+  for (const badge of document.querySelectorAll('[data-assignment-countdown]')) {
+    const days = countdownFor(badge.dataset.assignmentCountdown, today);
+    badge.dataset.urgency = days < 0 ? 'overdue' : days === 0 ? 'today' : 'upcoming';
+    badge.textContent = days < 0 ? 'באיחור של ' + Math.abs(days) + ' ימים'
+      : days === 0 ? 'להגשה היום' : days + ' ימים';
+  }
+}
+function fitAssignmentCourseNames() {
+  const columns = $('assignmentColumns');
+  const headings = document.querySelectorAll('.assignment-column h2');
+  columns.classList.add('measuring-names');
+  headings.forEach(heading => heading.classList.remove('compact-name'));
+  const overflowing = [...headings].filter(heading => heading.scrollWidth > heading.clientWidth);
+  overflowing.forEach(heading => heading.classList.add('compact-name'));
+  columns.classList.remove('measuring-names');
+}
+globalThis.addEventListener?.('resize', () => {
+  if (currentPage === 'assignments') fitAssignmentCourseNames();
+});
+function assignmentHeaderText(color) {
+  const channels = [1, 3, 5].map(index => {
+    const mixed = 0.3 * (parseInt(color.slice(index, index + 2), 16) / 255) + 0.7;
+    return mixed <= 0.04045 ? mixed / 12.92 : ((mixed + 0.055) / 1.055) ** 2.4;
+  });
+  const luminance = 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
+  return luminance >= 0.179 ? '#000' : '#fff';
+}
+function renderAssignments() {
+  const hidden = new Set(data.hiddenAssignmentCourses || []);
+  const courses = data.courses.filter(course => !hidden.has(course)).sort((a,b) => a.localeCompare(b,'he'));
+  const list = data.assignments || [];
+  $('manageAssignmentCourses').disabled = !data.courses.length;
+  $('assignmentsEmpty').classList.toggle('hidden', courses.length > 0);
+  $('assignmentsEmpty').textContent = data.courses.length
+    ? 'כל הקורסים מוסתרים. אפשר להחזיר אותם דרך ״הצגת קורסים״.'
+    : 'הוסיפי קורס דרך ״ניהול קורסים״ כדי להתחיל.';
+  $('assignmentColumns').innerHTML = courses.map(course => {
+    const items = list.filter(item => item.course === course
+      && (assignmentStatus === 'all' || item.done === (assignmentStatus === 'finished')))
+      .sort((a,b) => Number(a.done) - Number(b.done) || a.due.localeCompare(b.due));
+    const cards = items.map(item => {
+      const id = escapeHTML(item.id);
+      const title = escapeHTML(item.title);
+      return '<article class="assignment-item' + (item.done ? ' is-done' : '') + '">'
+        + '<input type="checkbox" data-assignment-check="' + id + '" aria-label="השלמת מטלה ' + title + '"' + (item.done ? ' checked' : '') + '>'
+        + '<div class="assignment-copy"><button type="button" data-assignment-edit="' + id + '" dir="auto">' + title + '</button>'
+        + '<time datetime="' + item.due + '">להגשה ב־' + date(item.due).toLocaleDateString('he-IL') + '</time></div>'
+        + (item.done ? '<span class="assignment-countdown">הושלמה</span>'
+          : '<span class="assignment-countdown" data-assignment-countdown="' + item.due + '"></span>') + '</article>';
+    }).join('');
+    const color = courseColor(course);
+    return '<section class="prep-panel assignment-column" data-assignment-course="' + escapeHTML(course)
+      + '" style="--course-color:' + color + ';--course-header-text:' + assignmentHeaderText(color)
+      + '"><div class="prep-panel-head"><h2 dir="auto" title="' + escapeHTML(course) + '">' + escapeHTML(course)
+      + '</h2><button type="button" data-assignment-add="' + escapeHTML(course)
+      + '">＋ מטלה</button></div><div class="solved-list">' + (cards || '<p class="prep-list-empty">אין מטלות להצגה במצב שנבחר.</p>') + '</div></section>';
+  }).join('');
+  fitAssignmentCourseNames();
+  updateAssignmentCountdowns();
+}
+$('manageAssignmentCourses').onclick = () => {
+  const hidden = new Set(data.hiddenAssignmentCourses || []);
+  $('assignmentCourseOptions').innerHTML = [...data.courses].sort((a,b) => a.localeCompare(b,'he')).map(course =>
+    '<label><input type="checkbox" data-assignment-visibility="' + escapeHTML(course) + '"'
+    + (hidden.has(course) ? '' : ' checked') + '><span dir="auto">' + escapeHTML(course) + '</span></label>'
+  ).join('');
+  $('assignmentCoursesDialog').showModal();
+};
+$('closeAssignmentCourses').onclick = () => $('assignmentCoursesDialog').close();
+$('assignmentCourseOptions').onchange = event => {
+  const course = event.target.dataset.assignmentVisibility;
+  if (!data.courses.includes(course)) return;
+  const hidden = new Set(data.hiddenAssignmentCourses || []);
+  if (event.target.checked) hidden.delete(course);
+  else hidden.add(course);
+  data.hiddenAssignmentCourses = [...hidden];
+  save();
+  renderAssignments();
+};
+function openAssignment(course, item) {
+  assignmentEdit = {course, id:item?.id};
+  $('assignmentTitle').textContent = item ? 'עריכת מטלה' : 'הוספת מטלה';
+  $('assignmentCourse').textContent = course;
+  $('assignmentName').value = item?.title || '';
+  $('assignmentDue').value = item?.due || '';
+  $('assignmentError').textContent = '';
+  $('deleteAssignment').classList.toggle('hidden', !item);
+  $('assignmentDialog').showModal();
+}
+$('assignmentColumns').onclick = event => {
+  const add = event.target.closest('[data-assignment-add]');
+  if (add) { openAssignment(add.dataset.assignmentAdd); return; }
+  const edit = event.target.closest('[data-assignment-edit]');
+  if (edit) {
+    const item = (data.assignments || []).find(item => item.id === edit.dataset.assignmentEdit);
+    if (item) openAssignment(item.course, item);
+  }
+};
+$('assignmentColumns').onchange = event => {
+  const item = (data.assignments || []).find(item => item.id === event.target.dataset.assignmentCheck);
+  if (!item) return;
+  item.done = event.target.checked;
+  save();
+  renderAssignments();
+};
+$('assignmentForm').onsubmit = event => {
+  event.preventDefault();
+  if (!assignmentEdit) return;
+  const title = $('assignmentName').value.trim(), due = $('assignmentDue').value;
+  if (!title || title.length > 200 || !validDate(due)) {
+    $('assignmentError').textContent = 'יש להזין שם מטלה ותאריך הגשה תקין.';
+    return;
+  }
+  const items = data.assignments ??= [];
+  const item = items.find(item => item.id === assignmentEdit.id);
+  if (item) Object.assign(item, {title, due});
+  else {
+    if (items.length >= 20000) {
+      $('assignmentError').textContent = 'אפשר לשמור עד 20,000 מטלות.';
+      return;
+    }
+    items.push({id:eventId(), course:assignmentEdit.course, title, due, done:false});
+  }
+  save();
+  $('assignmentDialog').close();
+  renderAssignments();
+};
+$('closeAssignment').onclick = $('cancelAssignment').onclick = () => $('assignmentDialog').close();
+$('deleteAssignment').onclick = () => {
+  const id = assignmentEdit?.id;
+  if (!id) return;
+  ask('למחוק את המטלה?', 'המטלה תוסר מרשימת הקורס.', () => {
+    data.assignments = (data.assignments || []).filter(item => item.id !== id);
+    save();
+    $('assignmentDialog').close();
+    renderAssignments();
+  });
+};
+globalThis.setInterval?.(() => {
+  if (currentPage === 'exam-prep') renderExamPrep();
+  if (currentPage === 'assignments' || currentPage === 'calendar') updateAssignmentCountdowns();
+}, 60000);
+render();
+readPageHash();
+</script>
+</body>
+</html>
