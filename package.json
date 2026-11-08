@@ -4,6 +4,7 @@
   "private": true,
   "description": "Local Hebrew study calendar, assignments, and exam preparation tracker",
   "scripts": {
-    "test": "node tests/verify.cjs"
+    "test": "node tests/verify.cjs",
+    "test:memorizer": "node memorizer/scripts/check.mjs && node memorizer/scripts/check-hebrew.mjs && node memorizer/scripts/check-course-content.mjs && node memorizer/scripts/check-gaussian-content.mjs"
   }
 }

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#254f42">
+  <meta name="description" content="מרחב אישי לתרגול משפטים ונוסחאות ולבניית מפת מושגים.">
+  <title>Memorizer</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="katex.min.css">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="katex.min.js"></script>
+  <script defer src="seed.js"></script>
+  <script defer src="conditional-signals.js"></script>
+  <script defer src="gaussian-signals.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#practice" aria-label="Memorizer — דף הבית"><span class="brandmark">⌘</span><span><b>Memorizer</b></span></a>
+    <nav class="main-nav" aria-label="ניווט ראשי">
+      <button data-view="practice"><span data-icon="spark"></span>תרגול<span class="nav-arrow">↖</span></button>
+      <button data-view="map"><span data-icon="map"></span>מפת מושגים</button>
+      <button data-view="material"><span data-icon="book"></span>החומר שלי</button>
+    </nav>
+    <div class="sidebar-bottom"><span class="status-dot"></span> נשמר במכשיר הזה<button id="data-button" aria-label="גיבויים וניהול נתונים" title="גיבויים וניהול נתונים" data-icon="settings"></button></div>
+  </aside>
+  <div class="app-shell">
+    <header class="topbar"><span class="breadcrumb"><b id="page-label">תרגול</b></span><span class="mobile-brand">❧ Memorizer</span><button class="quiet" id="backup-top"><span data-icon="download"></span><span>גיבוי</span></button></header>
+    <main id="main"></main>
+  </div>
+  <nav class="mobile-nav" aria-label="ניווט במכשיר נייד"><button data-view="practice"><span data-icon="spark"></span>תרגול</button><button data-view="map"><span data-icon="map"></span>מפה</button><button data-view="material"><span data-icon="book"></span>חומר</button><button id="mobile-data"><span data-icon="settings"></span>נתונים</button></nav>
+  <dialog id="editor"><form id="editor-form"><div class="modal-head"><div><h2 id="editor-title">הוספת חומר</h2></div><button type="button" class="icon-button close-dialog" aria-label="סגירה">×</button></div><div id="editor-fields"></div><p id="form-error" class="error" role="alert"></p><div class="modal-actions"><button type="button" class="quiet close-dialog">ביטול</button><button class="primary" type="submit">שמירת החומר <span>↖</span></button></div></form></dialog>
+  <dialog id="data-dialog"><div class="modal-head"><div><h2>גיבויים ונתונים</h2></div><button class="icon-button close-dialog" aria-label="סגירה">×</button></div><p>הנתונים נשמרים בדפדפן הזה, ללא סנכרון בין מכשירים.</p><button class="primary full" id="export-button"><span data-icon="download"></span>ייצוא גיבוי (קובץ JSON)</button><label class="import-button">ייבוא גיבוי<input id="import-file" aria-label="בחירת קובץ גיבוי" type="file" accept=".json,application/json"></label><p class="muted small">ייבוא יחליף את החומר ואת ההתקדמות במכשיר הזה.</p><p id="data-error" class="error" role="alert"></p></dialog>
+  <dialog id="course-dialog"><form id="course-form"><div class="modal-head"><h2>יצירת קורס</h2><button type="button" class="icon-button close-dialog" aria-label="סגירה">×</button></div><label>שם הקורס<input id="course-name" required maxlength="90" dir="auto" placeholder="למשל: ראייה ממוחשבת"></label><div class="modal-actions"><button type="button" class="quiet close-dialog">ביטול</button><button type="submit" class="primary">יצירת קורס ↖</button></div></form></dialog>
+  <div id="toast" role="status"></div>
+</body>
+</html>
