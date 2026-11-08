@@ -52,6 +52,16 @@ main{min-height:calc(100vh - 81px)}
 .source-info:last-child .source-entry:last-child{border-bottom:0}
 @media(max-width:680px){.course-control{display:grid;grid-template-columns:minmax(0,1fr) 40px;gap:8px}.unit-select{grid-column:1/-1;max-width:none}.course-control .course-select{min-width:0}.source-info{font-size:12px}.source-info summary{font-size:11px;min-height:36px;padding:8px 0}}
 
+/* High-contrast reading text in material cards and their detail view. */
+.material-card, .map-details { color:#111; }
+.material-card h2, .material-card p, .material-card .material-properties,
+.material-card .formula, .map-details h2, .map-details p,
+.map-details .material-properties, .map-details .formula { color:#111; }
+.material-card .type-badge, .material-card .pill,
+.material-card .card-actions small, .material-card .source-info,
+.material-card .source-info summary, .map-details .type-badge,
+.map-details .source-info, .map-details .source-info summary { color:#454e49; }
+
 .statement-text { white-space:pre-line; }
 .material-properties { padding-inline-start:1.6em; margin:0.8em 0; }
 .material-properties li { padding-inline-start:0.3em; margin-block:0.7em; white-space:pre-line; overflow-wrap:anywhere; }
