@@ -53,6 +53,15 @@ main{min-height:calc(100vh - 81px)}
 @media(max-width:680px){.course-control{display:grid;grid-template-columns:minmax(0,1fr) 40px;gap:8px}.unit-select{grid-column:1/-1;max-width:none}.course-control .course-select{min-width:0}.source-info{font-size:12px}.source-info summary{font-size:11px;min-height:36px;padding:8px 0}}
 
 .statement-text { white-space:pre-line; }
+.material-properties { padding-inline-start:1.6em; margin:0.8em 0; }
+.material-properties li { padding-inline-start:0.3em; margin-block:0.7em; white-space:pre-line; overflow-wrap:anywhere; }
+.properties-toggle { display:flex; align-items:center; gap:0.6em; }
+.properties-toggle input[type="checkbox"] { width:18px; height:18px; flex:none; margin:0; }
+#properties-editor[hidden] { display:none; }
+#properties-editor { margin-block:1em; }
+.property-row { display:flex; align-items:flex-start; gap:0.5em; margin-block:0.75em; }
+.property-row label { flex:1; min-width:0; }
+.property-row .icon-button { flex:none; margin-top:1.5em; }
 .statement-math { direction:ltr; unicode-bidi:isolate; white-space:normal; }
 .statement-math-block { display:block; max-width:100%; overflow-x:auto; margin:0.65em 0; }
 .statement-math .katex { white-space:normal; }
