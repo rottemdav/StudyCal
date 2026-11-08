@@ -51,3 +51,75 @@ main{min-height:calc(100vh - 81px)}
 .source-file{font-size:10px;align-self:flex-start}
 .source-info:last-child .source-entry:last-child{border-bottom:0}
 @media(max-width:680px){.course-control{display:grid;grid-template-columns:minmax(0,1fr) 40px;gap:8px}.unit-select{grid-column:1/-1;max-width:none}.course-control .course-select{min-width:0}.source-info{font-size:12px}.source-info summary{font-size:11px;min-height:36px;padding:8px 0}}
+
+/* Fluid desktop typography, with the existing compact layout below 681px. */
+@media (min-width:681px) {
+  :root {
+    --reading-size: clamp(15px, calc(12px + 0.35vw), 19px);
+    --control-size: clamp(14px, calc(11px + 0.25vw), 17px);
+    --caption-size: clamp(12px, calc(10px + 0.2vw), 14px);
+  }
+
+  body { font-size:var(--reading-size); line-height:1.65; }
+  main { max-width:1440px; }
+
+  html[dir="rtl"] .page-heading p,
+  html[dir="rtl"] .session-description,
+  html[dir="rtl"] .material-card p,
+  html[dir="rtl"] .map-details p,
+  .answer-option, .feedback, .feedback strong,
+  .result-center p, .result-row, .connection,
+  dialog > p, .data-info, .data-info p {
+    font-size:var(--reading-size);
+    line-height:1.8;
+  }
+
+  .main-nav button, .primary, .quiet, .text-link,
+  .course-select, .length-select, .search-wrap input, .filter,
+  .mode-option strong, .card-head h2, .stats-card h3,
+  .section-title h2, .preview-row h3, .stat-row,
+  .setup-label, label, .checkbox-list label, .map-top {
+    font-size:var(--control-size);
+  }
+
+  .eyebrow, .sidebar-label, .sidebar-bottom, .breadcrumb,
+  .pill, .section-kicker, .question-number, .mode-option small,
+  .subtle-tip, .ring-text small, .stats-note, .map-teaser p,
+  .map-teaser .eyebrow, .preview-row small, .demo-notice,
+  .type-badge, .card-actions small, .map-top small,
+  .map-details h3, .map-legend, .map-hint, .topic-legend,
+  .connection small, .source-info, .source-info summary,
+  .source-file, label small, .quiz-bottom small, .answer-key {
+    font-size:var(--caption-size);
+    line-height:1.6;
+  }
+
+  .small { font-size:var(--caption-size) !important; }
+  html[dir="rtl"] .page-heading h1 { font-size:clamp(32px, 2.6vw, 42px); }
+  html[dir="rtl"] .session-title,
+  .material-card h2, .map-details h2,
+  .modal-head h2 { font-size:clamp(25px, 2vw, 32px); }
+  html[dir="rtl"] .quiz-question {
+    font-size:clamp(24px, 1.9vw, 32px);
+    line-height:1.7;
+  }
+  .formula, .map-details .formula { font-size:clamp(20px, 1.5vw, 26px); }
+  .session-description { max-width:65ch; }
+  .ring-text b { font-size:clamp(28px, 2vw, 34px); }
+  label input, label select, label textarea {
+    font-size:clamp(16px, 1.1vw, 19px);
+  }
+  .concept-svg .node text { font-size:clamp(11px, 0.85vw, 14px); }
+  .concept-svg .node .type { font-size:clamp(9px, 0.65vw, 11px); }
+  .sidebar-bottom { white-space:normal; }
+  .page-heading { flex-wrap:wrap; }
+  .course-control { min-width:0; }
+  .course-select { min-width:0; }
+  .stats-card .stat-row { flex-wrap:wrap; }
+  dialog { max-width:740px; }
+}
+
+@media (min-width:1151px) {
+  .practice-layout { grid-template-columns:minmax(0,1fr) clamp(260px, 20vw, 320px); }
+  .map-layout { grid-template-columns:minmax(0,1fr) clamp(270px, 22vw, 350px); }
+}
