@@ -52,6 +52,11 @@ main{min-height:calc(100vh - 81px)}
 .source-info:last-child .source-entry:last-child{border-bottom:0}
 @media(max-width:680px){.course-control{display:grid;grid-template-columns:minmax(0,1fr) 40px;gap:8px}.unit-select{grid-column:1/-1;max-width:none}.course-control .course-select{min-width:0}.source-info{font-size:12px}.source-info summary{font-size:11px;min-height:36px;padding:8px 0}}
 
+.statement-text { white-space:pre-line; }
+.statement-math { direction:ltr; unicode-bidi:isolate; white-space:normal; }
+.statement-math-block { display:block; max-width:100%; overflow-x:auto; margin:0.65em 0; }
+.statement-math .katex { white-space:normal; }
+
 /* Fluid desktop typography, with the existing compact layout below 681px. */
 @media (min-width:681px) {
   :root {
