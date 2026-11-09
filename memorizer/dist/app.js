@@ -195,6 +195,90 @@
   function exportData(){
     const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`memorizer-${new Date().toISOString().slice(0,10)}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('הגיבוי יוצא בהצלחה. כדאי לשמור אותו במקום בטוח.');
   }
+  const githubSyncDialog = $('#github-sync-dialog');
+  const githubSyncForm = $('#github-sync-form');
+  const githubSyncStatus = $('#github-sync-status');
+
+  $('#github-sync-button').addEventListener('click', () => {
+    githubSyncStatus.textContent = '';
+    githubSyncDialog.showModal();
+  });
+  githubSyncDialog.addEventListener('close', () => {
+    githubSyncForm.elements.token.value = '';
+  });
+
+  githubSyncForm.addEventListener('submit', async event => {
+    event.preventDefault();
+    const repository = githubSyncForm.elements.repository.value.trim();
+    const token = githubSyncForm.elements.token.value.trim();
+    if (!/^[a-z0-9-]+\/[a-z0-9_.-]+$/i.test(repository) || repository.split('/')[1].startsWith('.')) {
+      githubSyncStatus.textContent = 'יש להזין מאגר בפורמט owner/repository.';
+      return;
+    }
+    if (!/^github_pat_[a-zA-Z0-9_]+$/.test(token)) {
+      githubSyncStatus.textContent = 'יש להזין אסימון Fine-grained של GitHub.';
+      return;
+    }
+    const bytes = new TextEncoder().encode(JSON.stringify(state, null, 2));
+    if (bytes.length > 10 * 1024 * 1024) {
+      githubSyncStatus.textContent = 'הגיבוי גדול מדי לסנכרון. אפשר לייצא אותו כקובץ מקומי.';
+      return;
+    }
+    githubSyncForm.elements.token.value = '';
+    const submit = $('button[type="submit"]', githubSyncForm);
+    if (submit.disabled) return;
+    submit.disabled = true;
+    githubSyncStatus.textContent = 'שומר גיבוי ב־GitHub…';
+
+    const repoUrl = 'https://api.github.com/repos/' + repository;
+    const headers = { Authorization: 'Bearer ' + token, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
+    const request = (url, options = {}) => fetch(url, { headers, redirect: 'error', cache: 'no-store', ...options });
+    try {
+      const repoResponse = await request(repoUrl);
+      if (!repoResponse.ok) throw Error('לא ניתן לגשת למאגר. בדקי את השם ואת הרשאות האסימון.');
+      const repo = await repoResponse.json();
+      if (repo.visibility !== 'private') throw Error('יש לבחור מאגר פרטי כדי לשמור את החומר וההתקדמות.');
+      const fileUrl = repoUrl + '/contents/memorizer-backup.json';
+      const current = await request(fileUrl + '?ref=' + encodeURIComponent(repo.default_branch));
+      if (!current.ok && current.status !== 404) throw Error('לא ניתן לקרוא את הגיבוי הקיים במאגר.');
+      const file = current.ok ? await current.json() : null;
+      if (file && (file.type !== 'file' || !file.sha)) throw Error('נתיב הגיבוי כבר משמש פריט שאינו קובץ.');
+      let binary = '';
+      for (let offset = 0; offset < bytes.length; offset += 8192) {
+        binary += String.fromCharCode(...bytes.subarray(offset, offset + 8192));
+      }
+      const content = btoa(binary);
+      if (file?.content?.replace(/\s/g, '') === content) {
+        githubSyncStatus.textContent = 'הגיבוי ב־GitHub כבר מעודכן.';
+        return;
+      }
+      const response = await request(fileUrl, {
+        method: 'PUT',
+        headers: { ...headers, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: 'Back up Memorizer study data',
+          branch: repo.default_branch,
+          content,
+          ...(file ? { sha: file.sha } : {})
+        })
+      });
+      if (!response.ok) {
+        if (response.status === 409) throw Error('הגיבוי השתנה בזמן הסנכרון. בדקי את הגרסה ב־GitHub לפני ניסיון נוסף.');
+        throw Error('הגיבוי לא נשמר. בדקי הרשאת כתיבה ושהענף הראשי מאפשר עדכון.');
+      }
+      const result = await response.json();
+      const link = document.createElement('a');
+      link.href = 'https://github.com/' + repository + '/commit/' + result.commit.sha;
+      link.textContent = 'לצפייה בשמירה ב־GitHub';
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      githubSyncStatus.replaceChildren('הגיבוי נשמר. ', link);
+    } catch (error) {
+      githubSyncStatus.textContent = error instanceof TypeError ? 'לא ניתן להתחבר ל־GitHub. בדקי את החיבור ונסי שוב.' : error.message;
+    } finally {
+      submit.disabled = false;
+    }
+  });
   $('#import-file').addEventListener('change',async e=>{
     const f=e.target.files[0];if(!f)return;$('#data-error').textContent='';
     try{if(f.size>10*1024*1024)throw Error('יש לבחור קובץ גיבוי קטן מ־10 מגה־בייט.');const imported=validate(JSON.parse(await f.text()));if(!confirm(`להחליף את החומר במכשיר הזה ב־${imported.courses.length} קורסים וב־${imported.items.length} פריטי חומר? כדי לשמור את הנתונים הקיימים, יש לייצא גיבוי לפני הייבוא.`))return;state=imported;session=null;selectedId='';search='';filter='All';save();$('#data-dialog').close();render();toast('הגיבוי יובא בהצלחה. החומרים שלך מוכנים לתרגול.');}

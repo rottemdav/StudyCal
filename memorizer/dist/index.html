@@ -32,8 +32,18 @@
   </div>
   <nav class="mobile-nav" aria-label="ניווט במכשיר נייד"><button data-view="practice"><span data-icon="spark"></span>תרגול</button><button data-view="map"><span data-icon="map"></span>מפה</button><button data-view="material"><span data-icon="book"></span>חומר</button><button id="mobile-data"><span data-icon="settings"></span>נתונים</button></nav>
   <dialog id="editor"><form id="editor-form"><div class="modal-head"><div><h2 id="editor-title">הוספת חומר</h2></div><button type="button" class="icon-button close-dialog" aria-label="סגירה">×</button></div><div id="editor-fields"></div><p id="form-error" class="error" role="alert"></p><div class="modal-actions"><button type="button" class="quiet close-dialog">ביטול</button><button class="primary" type="submit">שמירת החומר <span>↖</span></button></div></form></dialog>
-  <dialog id="data-dialog"><div class="modal-head"><div><h2>גיבויים ונתונים</h2></div><button class="icon-button close-dialog" aria-label="סגירה">×</button></div><p>הנתונים נשמרים בדפדפן הזה, ללא סנכרון בין מכשירים.</p><button class="primary full" id="export-button"><span data-icon="download"></span>ייצוא גיבוי (קובץ JSON)</button><label class="import-button">ייבוא גיבוי<input id="import-file" aria-label="בחירת קובץ גיבוי" type="file" accept=".json,application/json"></label><p class="muted small">ייבוא יחליף את החומר ואת ההתקדמות במכשיר הזה.</p><p id="data-error" class="error" role="alert"></p></dialog>
+  <dialog id="data-dialog"><div class="modal-head"><div><h2>גיבויים ונתונים</h2></div><button class="icon-button close-dialog" aria-label="סגירה">×</button></div><p>הנתונים נשמרים בדפדפן הזה. אפשר לגבות אותם ידנית ל־GitHub.</p><button class="primary full" id="export-button"><span data-icon="download"></span>ייצוא גיבוי (קובץ JSON)</button><label class="import-button">ייבוא גיבוי<input id="import-file" aria-label="בחירת קובץ גיבוי" type="file" accept=".json,application/json"></label><p class="muted small">ייבוא יחליף את החומר ואת ההתקדמות במכשיר הזה.</p><button class="quiet full" id="github-sync-button" type="button">סנכרון ל־GitHub</button><p id="data-error" class="error" role="alert"></p></dialog>
   <dialog id="course-dialog"><form id="course-form"><div class="modal-head"><h2>יצירת קורס</h2><button type="button" class="icon-button close-dialog" aria-label="סגירה">×</button></div><label>שם הקורס<input id="course-name" required maxlength="90" dir="auto" placeholder="למשל: ראייה ממוחשבת"></label><div class="modal-actions"><button type="button" class="quiet close-dialog">ביטול</button><button type="submit" class="primary">יצירת קורס ↖</button></div></form></dialog>
+  <dialog id="github-sync-dialog">
+    <form id="github-sync-form" method="dialog">
+      <div class="modal-head"><h2>סנכרון ל־GitHub</h2><button type="button" class="icon-button close-dialog" aria-label="סגירה">×</button></div>
+      <p>החומר וההתקדמות מהמכשיר הזה יישמרו כקובץ גיבוי במאגר פרטי. אפשר להוריד את הקובץ מ־GitHub ולייבא אותו דרך ״גיבויים ונתונים״.</p>
+      <label>מאגר פרטי<input name="repository" required placeholder="owner/repository" dir="ltr" autocomplete="off"></label>
+      <label>אסימון גישה של GitHub<input name="token" type="password" required dir="ltr" autocomplete="off"><small>השתמשי באסימון Fine-grained שמוגבל למאגר הזה עם הרשאת Contents לקריאה וכתיבה. האסימון משמש לפעולה הזו בלבד.</small></label>
+      <p id="github-sync-status" role="status" aria-live="polite"></p>
+      <div class="modal-actions"><button type="button" class="quiet close-dialog">סגירה</button><button type="submit" class="primary">שמירת גיבוי ל־GitHub</button></div>
+    </form>
+  </dialog>
   <div id="toast" role="status"></div>
 </body>
 </html>
