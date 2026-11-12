@@ -98,7 +98,15 @@
     return html+esc(text.slice(cursor));
   }
   const typeLabel = t => ({Theorem:'משפט',Claim:'טענה',Formula:'נוסחה',Definition:'הגדרה'}[t] || t);
-  const propertyList = i => i.propertiesEnabled&&i.properties?.length?`<ol class="material-properties">${i.properties.map(p=>`<li dir="auto">${materialText(p)}</li>`).join('')}</ol>`:'';
+  function propertyList(item) {
+    if (!item.propertiesEnabled || !item.properties?.length) return '';
+    const rows = item.properties.map((property, index) => `
+      <li class="material-property">
+        <span class="material-property-number" aria-hidden="true">${index + 1}.</span>
+        <div class="material-property-text" dir="auto">${materialText(property)}</div>
+      </li>`);
+    return `<ol class="material-properties" dir="rtl" role="list">${rows.join('')}</ol>`;
+  }
   function propertyRow(value='') {
     return `<div class="property-row"><label>תכונה <span class="property-number"></span><textarea name="property" rows="2" maxlength="10000" dir="auto">${esc(value)}</textarea></label><button type="button" class="icon-button" data-action="remove-property" aria-label="הסרת תכונה">×</button></div>`;
   }

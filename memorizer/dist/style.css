@@ -63,8 +63,32 @@ main{min-height:calc(100vh - 81px)}
 .map-details .source-info, .map-details .source-info summary { color:#454e49; }
 
 .statement-text { white-space:pre-line; }
-.material-properties { padding-inline-start:1.6em; margin:0.8em 0; }
-.material-properties li { padding-inline-start:0.3em; margin-block:0.7em; white-space:pre-line; overflow-wrap:anywhere; }
+.material-properties {
+  display:grid;
+  gap:0.5em;
+  padding:0;
+  margin:0.8em 0;
+  list-style:none;
+}
+.material-property {
+  display:grid;
+  grid-template-columns:2.5ch minmax(0,1fr);
+  align-items:start;
+  gap:0.5em;
+  padding:0.6em 0.75em;
+  border-radius:10px;
+  background:#f0f5ec;
+}
+.material-property:nth-child(3n+2) { background:#edf3f8; }
+.material-property:nth-child(3n+3) { background:#f8f3ea; }
+.material-property-number {
+  direction:ltr;
+  text-align:right;
+  font-weight:600;
+  font-variant-numeric:tabular-nums;
+  color:#40534a;
+}
+.material-property-text { min-width:0; white-space:pre-line; overflow-wrap:anywhere; }
 .properties-toggle { display:flex; align-items:center; gap:0.6em; }
 .properties-toggle input[type="checkbox"] { width:18px; height:18px; flex:none; margin:0; }
 #properties-editor[hidden] { display:none; }
