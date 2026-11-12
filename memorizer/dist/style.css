@@ -79,8 +79,6 @@ main{min-height:calc(100vh - 81px)}
   border-radius:10px;
   background:#f0f5ec;
 }
-.material-property:nth-child(3n+2) { background:#edf3f8; }
-.material-property:nth-child(3n+3) { background:#f8f3ea; }
 .material-property-number {
   direction:ltr;
   text-align:right;
