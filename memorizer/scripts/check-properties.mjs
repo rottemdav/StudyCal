@@ -4,8 +4,8 @@ import assert from 'node:assert/strict';
 const app=fs.readFileSync(new URL('../dist/app.js',import.meta.url),'utf8');
 const seedContext={window:{}};
 vm.runInNewContext(fs.readFileSync(new URL('../dist/seed.js',import.meta.url),'utf8'),seedContext);
-const validate=vm.runInNewContext(app.slice(app.indexOf('  function validate('),app.indexOf('  try {const raw=localStorage'))+';validate',{
-  window:{addGaussianContent:x=>x,addConditionalContent:x=>x,localizeExamples:x=>x}
+const validate=vm.runInNewContext(app.slice(app.indexOf('  function validate('),app.indexOf('  let retiredCardsRemoved'))+';validate',{
+  window:{removeRetiredGaussianCards:()=>false,addConditionalContent:x=>x,localizeExamples:x=>x}
 });
 const data=JSON.parse(JSON.stringify(seedContext.window.SEED));
 assert.doesNotThrow(()=>validate(data));

@@ -45,10 +45,26 @@
       if(!p || !Number.isInteger(p.attempts) || !Number.isInteger(p.correct) || p.attempts<0 || p.correct<0 || p.correct>p.attempts || typeof p.lastCorrect!=='boolean' || !Number.isFinite(p.lastSeen))throw Error('נתוני ההתקדמות בתרגול אינם תקינים.');
       progress[id]={attempts:p.attempts,correct:p.correct,lastCorrect:p.lastCorrect,lastSeen:p.lastSeen};
     }
-    return window.addGaussianContent(window.addConditionalContent(window.localizeExamples({version:1,courses:data.courses.map(c=>({id:c.id,name:c.name,demo:!!c.demo})),items:data.items.map(i=>({...i,links:[...new Set(i.links)]})),progress,sessions:[],contentPacks:Object.fromEntries(Object.entries(data.contentPacks||{}).filter(([,v])=>Number.isInteger(v)&&v>=0)),selectedCourse:courseIds.has(data.selectedCourse)?data.selectedCourse:data.courses[0].id})));
+    const normalized = window.addConditionalContent(window.localizeExamples({version:1,courses:data.courses.map(c=>({id:c.id,name:c.name,demo:!!c.demo})),items:data.items.map(i=>({...i,links:[...new Set(i.links)]})),progress,sessions:[],contentPacks:Object.fromEntries(Object.entries(data.contentPacks||{}).filter(([,v])=>Number.isInteger(v)&&v>=0)),selectedCourse:courseIds.has(data.selectedCourse)?data.selectedCourse:data.courses[0].id}));
+    window.removeRetiredGaussianCards(normalized);
+    return normalized;
   }
-  try {const raw=localStorage.getItem(KEY);state=raw?validate(JSON.parse(raw)):structuredClone(window.SEED);} catch {state=structuredClone(window.SEED);initialWarning='לא ניתן לקרוא את הנתונים השמורים. מוצג חומר לדוגמה. אפשר לייבא גיבוי כדי לשחזר את החומרים שלך.';}
-  state=window.addGaussianContent(window.addConditionalContent(state));
+  let retiredCardsRemoved = false;
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (raw) {
+      const saved = JSON.parse(raw);
+      state = validate(saved);
+      const remainingIds = new Set(state.items.map(item => item.id));
+      retiredCardsRemoved = saved.items.some(item => !remainingIds.has(item.id));
+    } else {
+      state = structuredClone(window.SEED);
+    }
+  } catch {
+    state = structuredClone(window.SEED);
+    initialWarning = 'לא ניתן לקרוא את הנתונים השמורים. מוצג חומר לדוגמה. אפשר לייבא גיבוי כדי לשחזר את החומרים שלך.';
+  }
+  state = window.addConditionalContent(state);
   let unitFilter='conditional-moments';
   let view=['practice','map','material'].includes(location.hash.slice(1))?location.hash.slice(1):'practice';
   let mode='mixed',session=null,filter='All',search='',selectedId='',editingId=null,toastTimer;
@@ -322,5 +338,5 @@
   $('#data-button').addEventListener('click',openData);$('#mobile-data').addEventListener('click',openData);$('#backup-top').addEventListener('click',openData);$('#export-button').addEventListener('click',exportData);
   window.addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(['practice','map','material'].includes(h))go(h);});
   window.addEventListener('storage',e=>{if(e.key===KEY&&e.newValue){try{state=validate(JSON.parse(e.newValue));session=null;render();toast('הנתונים עודכנו מלשונית אחרת.');}catch{toast('לא ניתן לטעון את הנתונים שנשמרו בלשונית אחרת.');}}});
-  hydrate();render();if(initialWarning)toast(initialWarning);
+  hydrate();render();if(retiredCardsRemoved)save();if(initialWarning)toast(initialWarning);
 })();
