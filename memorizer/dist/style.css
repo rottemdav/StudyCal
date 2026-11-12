@@ -62,7 +62,7 @@ main{min-height:calc(100vh - 81px)}
 .material-card .source-info summary, .map-details .type-badge,
 .map-details .source-info, .map-details .source-info summary { color:#454e49; }
 
-.statement-text { white-space:pre-line; }
+.statement-text { white-space:pre-line; text-align:right; }
 .material-properties {
   display:grid;
   gap:0.5em;
@@ -86,7 +86,7 @@ main{min-height:calc(100vh - 81px)}
   font-variant-numeric:tabular-nums;
   color:#40534a;
 }
-.material-property-text { min-width:0; white-space:pre-line; overflow-wrap:anywhere; }
+.material-property-text { min-width:0; white-space:pre-line; overflow-wrap:anywhere; text-align:right; }
 .properties-toggle { display:flex; align-items:center; gap:0.6em; }
 .properties-toggle input[type="checkbox"] { width:18px; height:18px; flex:none; margin:0; }
 #properties-editor[hidden] { display:none; }
